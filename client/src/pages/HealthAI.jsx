@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import HeaderPostLogin from "../components/HeaderPostLogin";
 import Chip from "../components/Chip";
+import axios from "axios";
 
 function HealthAI() {
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
@@ -141,6 +142,24 @@ function HealthAI() {
     // Add more symptoms here as needed
   ];
 
+  const [response, setResponse] = useState(null);
+
+  const fetchDataWithHistory = async (prompt) => {
+    try {
+      console.log(prompt);
+      const response = await axios.post('http://localhost:3000/history', { prompt });
+      console.log(response.data); // Log the response data
+      // Handle the response here
+    } catch (error) {
+      console.error(error); // Log the error
+      // Handle the error here
+    }
+  };
+
+  useEffect(() => {
+    fetchDataWithHistory("I am having ulcers in my mouth");
+  }
+  , []);
   return (
     <div>
       <HeaderPostLogin name="Parth B" />
