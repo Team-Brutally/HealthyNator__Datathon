@@ -64,7 +64,7 @@ const mailerFunction = async (req, res) => {
   const { attachment, attachment_name } = req.body;
   if (attachment && attachment_name) {
     sendEmailWithAttachment(to, subject, text, attachment, attachment_name);
-    res.json({ message: "Email sent with attachment" });
+    res.json({ message: `Email sent with attachment to ${to}` });
     return;
   }
   sendEmail(to, subject, text);

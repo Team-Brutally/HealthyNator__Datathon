@@ -2,6 +2,11 @@ import express from 'express';
 import PDFKit from 'pdfkit';
 import cors from 'cors';
 
+/**
+ * Unused function to generate a PDF
+ * Might be discarded in the future
+ */
+
 const generatePDF = (req, res) => {
     // Create a PDF document
     console.log('PDF generation request received');

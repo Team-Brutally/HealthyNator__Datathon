@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    Hello World
-    <h1>Welcome to HealthyNator</h1>
-    <p>Stay healthy and fit with HealthyNator!</p>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            .center {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100px; /* Adjust as needed */
+            }
+        </style>
+    </head>
+    <body style="background-color: #f0f0f0;">
+        <div class="center">
+            <object type="image/svg+xml" data="NavLogo.svg">Your browser does not support SVG</object>
+        </div>
+        <div class="center">
+            {content}
+        </div>
+    </body>
 </html>

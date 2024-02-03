@@ -9,8 +9,6 @@ const router = express.Router();
 router.get("/", (req, res) => {
   res.send("Hello World!");
 });
-// Mailing routes
-router.post("/sendmail", sendmail);
 
 // Gemini AI routes
 router.post("/ai", GeminiApi);
