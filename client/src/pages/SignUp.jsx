@@ -15,18 +15,39 @@ const genders = [
   {value: "male", label: "Male"}, {value: "Female", label: "Female"}
 ]
 function SignUp() {
-  return (
-    
+  const textFieldInputProps = {
+    style: {
+      width: "450px", // Set your desired width
+      backgroundColor: "#101010", // Set the background color to white
+      color: "#fff",
+    },
+  };
+
+  const textFieldInputLabelProps = {
+    style: {
+      color: "white", // Set the label text color to white
+    },
+  };
+  return (  
     <>
-    <Navbar />
       <div className="masterSignUp">
         <div className="suCont">
           <span>Please enter the details...</span>
-          <span><TextField label="Name: " placeholder="Name"/></span>
-          <span><TextField label="Age: " placeholder="Age"/></span>
-          <span><TextField label="Email: " placeholder="Email"/></span>
-          <span><TextField label="Contact: " placeholder="Contact"/></span>
-          <span><TextField
+          <span><TextField variant="filled" label="Name: " placeholder="Name"
+          InputProps={textFieldInputProps}
+          InputLabelProps={textFieldInputLabelProps}/></span>
+          <span><TextField variant="filled" label="Age: " placeholder="Age"
+          InputProps={textFieldInputProps}
+          InputLabelProps={textFieldInputLabelProps}/></span>
+          <span><TextField label="Email: " placeholder="Email"
+          InputProps={textFieldInputProps}
+          InputLabelProps={textFieldInputLabelProps}/></span>
+          <span><TextField variant="filled" label="Contact: " placeholder="Contact"
+          InputProps={textFieldInputProps}
+          InputLabelProps={textFieldInputLabelProps}/></span>
+          <span><TextField variant="filled" 
+          InputProps={textFieldInputProps}
+          InputLabelProps={textFieldInputLabelProps}
           select
           label="Please select your Blood group"
           defaultValue="A+"
@@ -38,7 +59,9 @@ function SignUp() {
             </MenuItem>
           ))}
         </TextField></span>
-        <span><TextField
+        <span><TextField variant="filled" 
+        InputProps={textFieldInputProps}
+        InputLabelProps={textFieldInputLabelProps}
           select
           label="Please select your gender"
           fullWidth
@@ -51,10 +74,24 @@ function SignUp() {
             </MenuItem>
           ))}
         </TextField></span>
-            <span><TextField label="Height-Feet"></TextField><TextField label="Inches"></TextField></span>
-            <span><TextField label="Weight-kg"></TextField></span>
-            <span><TextField label="Any Previous allergies?" fullWidth></TextField></span>
-            <span><TextField label="Your address" fullWidth></TextField></span>
+            <span><TextField variant="filled" label="Height-Feet"
+            InputProps={textFieldInputProps}
+            InputLabelProps={textFieldInputLabelProps}></TextField><TextField label="Inches"></TextField></span>
+            <span><TextField variant="filled" label="Weight-kg"
+            InputProps={textFieldInputProps}
+            InputLabelProps={textFieldInputLabelProps}></TextField></span>
+            <span><TextField variant="filled" label="Any Previous allergies?" 
+            InputProps={textFieldInputProps}
+            InputLabelProps={textFieldInputLabelProps} fullWidth></TextField></span>
+            <span><TextField variant="filled" label="Your address" fullWidth
+            InputProps={textFieldInputProps}
+            InputLabelProps={textFieldInputLabelProps}></TextField></span>
+            <span><TextField variant="filled" label="Password" fullWidth
+            InputProps={textFieldInputProps}
+            InputLabelProps={textFieldInputLabelProps}></TextField></span>
+            <span><TextField variant="filled" label="Confirm Password" fullWidth
+            InputProps={textFieldInputProps}
+            InputLabelProps={textFieldInputLabelProps}></TextField></span>
             <span><Button variant="contained" style={{ backgroundColor: '#4461F2', color: 'white' }}>Sign Up</Button></span>
             
         </div>
