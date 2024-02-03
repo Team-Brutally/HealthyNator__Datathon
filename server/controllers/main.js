@@ -48,9 +48,7 @@ export const createPatient = async (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     } else {
       console.log("Test 3");
-      if (password !== confirmPassword) {
-        return res.status(400).json({ message: "Passwords don't match" });
-      }
+     
 
       try {
         console.log("Test 4");
@@ -159,7 +157,7 @@ export const createDoctor = async (req, res) => {
         });
 
         await newUser.save();
-
+        console.log(process.env.JWT_SECRET)
         var token = jwt.sign(
           { email: newUser.email, id: newUser._id, name: `${name}` },
           process.env.JWT_SECRET,
@@ -180,10 +178,23 @@ export const createDoctor = async (req, res) => {
 
 
 export const getCustomPatient = async (req, res) => {
-  const { id } = req.params;
+  const { email, password } = req.body;
+  console.log(req.body);
   try {
-    const patient = await Patient.findById({email: id})
-    res.status(200).json(patient);
+    const patient = await Patient.findOne({email: email})
+    if (!patient) {
+      return res.status(404).json({ message: "User doesn't exist" });
+    }
+    const isPasswordCorrect = await argon2.verify(patient.password, password);
+    if (!isPasswordCorrect) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+    const token = jwt.sign(
+      { email: patient.email, id: patient._id, name: `${patient.name}` },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+    res.status(200).json({ result: patient, token });
   }
   catch (err) {
     res.status(404).json({ message: err.message });

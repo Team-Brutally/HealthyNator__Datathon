@@ -33,8 +33,12 @@ const initialPatientState = {
 const UserHome = () => {
   const [confirmPassword,setCPassword]=useState("");
   const [user, setUser] = useState(initialPatientState);
+
   
   const {isSigned}=useAppContext();
+  const {setIsSignedIn} = useAppContext();
+  const {setAppUser} = useAppContext();
+  const {appUser} = useAppContext();
   const [isSignUp, setIsSignUp] = useState(true);
 
   const [userFlow, setUserFlow] = useState(1);
@@ -302,7 +306,7 @@ const UserHome = () => {
               <p className="text-end text-xs text-[#C7C7C7]">
                 Recover Password?
               </p>
-              <button className="w-full bg-[#4461F2] mt-10 rounded-lg h-[8%] font-bold" onClick={()=>{
+              <button className="w-full bg-[#4461F2] mt-10 rounded-lg h-[8%] font-bold" onClick={async ()=>{
                 if(isSignUp){
                   if(userFlow===1){
                     if(user.password === confirmPassword)
@@ -329,6 +333,23 @@ const UserHome = () => {
                   }
                   else
                   {
+                    try
+                    {
+                      const userObj = await axios.post('http://localhost:3000/users/patients', user, {
+                        headers: {
+                          'Access-Control-Allow-Origin': '*',
+                          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+                          'Access-Control-Allow-Headers': 'Content-Type',
+                          
+                        },withCredentials: true,
+                      });
+                      console.log(userObj);
+                    }
+                    catch(err)
+                    {
+                      console.log(err);
+                    }
+                   
                     navigate('/home');
                   }
                 }
