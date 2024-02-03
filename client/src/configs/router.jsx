@@ -6,6 +6,8 @@ import SignUp from "../pages/SignUp";
 import MyAppointments from "../pages/MyAppointments";
 // import Login from "../pages/Login";
 import UserHome from "../pages/UserHome";
+import HealthAI from "../pages/HealthAI";
+import UserProfile from "../pages/UserProfile";
 
 const router = createBrowserRouter([
   {
@@ -20,20 +22,24 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "/signup",
-    element: <SignUp />,
+    path: "/sign",
+    element: <UserHome />,
+  },
+  {
+    path: "/ai",
+    element: <HealthAI />,
   },
   {
     path: "/myappointments",
     element: <MyAppointments />,
   },
   {
-    path: "*",
-    element: <h1>Not Found</h1>,
+    path: "/home",
+    element: <UserProfile />,
   },
   {
-    path: "/userhome",
-    element: <UserHome />,
+    path: "*",
+    element: <h1>Not Found</h1>,
   },
 ]);
 
