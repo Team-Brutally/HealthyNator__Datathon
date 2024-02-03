@@ -48,7 +48,7 @@ const GeminiApi = async (req, res) => {
   console.log(req.body);
   console.log(Inputprompt);
   try {
-    const response = await run(Inputprompt, Inputdata);
+    const response = await run( Inputdata, Inputprompt);
     console.log(response);
     res.json({ response });
   } catch (error) {
@@ -80,7 +80,7 @@ export const GeminiWithHistory = async (req, res) => {
         role: "user",
         parts: [
           {
-            text: 'Also Make sure that when you respond, say "Consult a doctor if symptoms persist"',
+            text: 'Also Make sure that when you respond, say "Consult a doctor if symptoms persist" and give the answer as short and concise as possible. Do not give long answers. Keep it short and simple',
           },
         ],
       },
@@ -140,7 +140,7 @@ export const GeminiWithHistory = async (req, res) => {
       history,
     });
 
-    const msg = req.body.prompt;
+    const msg = req.body.prompt+' give me the answer in only 5 lines';
     history.push({
       role: "user",
       parts: [{ text: msg }],

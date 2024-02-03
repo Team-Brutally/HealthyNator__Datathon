@@ -12,7 +12,7 @@ dotenv.config();
 const port = process.env.PORT || 3000;
 
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: "*",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   optionsSuccessStatus: 204,
@@ -24,6 +24,7 @@ app.use(cors(corsOptions));
 app.use("/", postRoutes);
 app.use("/users", userRoutes);
 app.use('/features',featuresRoutes);
+
 
 const connection_url = process.env.CONNECTION_URL;
 

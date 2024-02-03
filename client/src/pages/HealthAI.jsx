@@ -6,6 +6,8 @@ import axios from "axios";
 
 function HealthAI() {
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
+  const [summary, setSummary] = useState("");
+  const [input, setInput] = useState("");
 
   const handleChipClick = (symptom) => {
     // Handle the click event, you can update the state or perform other actions
@@ -54,11 +56,13 @@ function HealthAI() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(inputValue === '') return;
     console.log(inputValue);
     const msg = {
       message: inputValue,
       isSender: true,
     };
+
     setMessages((prevMessages) => [...prevMessages, msg]);
 
     setInputValue("");
@@ -245,7 +249,46 @@ function HealthAI() {
                 value={inputValue}
               />
               <div className="w-[10%] h-full rounded-xl py-6 px-4 flex justify-center items-center">
-                <button className="w-[90%] h-full py-6 bg-[#FF0404] px-4 rounded-2xl flex justify-center items-center">
+                <button type='button' className="w-[90%] h-full py-6 bg-[#FF0404] px-4 rounded-2xl flex justify-center items-center" onClick={async ()=>{
+                     const storedMessages = localStorage.getItem("healthAiMessages");
+                  const parsedMessages = JSON.parse(storedMessages);
+         
+                  for(let i = 0; i < parsedMessages.length; i++){
+                    if(parsedMessages[i].isSender===false){
+                    setInput((prev) => prev + parsedMessages[i].message + " ")
+                    }
+                  }
+
+                  console.log(input);
+
+                  try
+                  {
+                    const response= await axios.post("http://localhost:3000/history", {
+                    prompt: "Give the answer in only 5 lines in md format.",
+                    data:input
+                  });
+                  console.log(response.data);
+
+                  const response2 =await axios.post("http://localhost:3000/features/pdfgenerate", {
+                    content: response.data
+                  });
+
+                  
+                  const pdfData = response2.data;
+              
+                  const blob = new Blob([pdfData], { type: "application/pdf" });
+                  
+                  const link = document.createElement("a");
+                  link.href = window.URL.createObjectURL(blob);
+                  link.download = "output.pdf";
+                  link.click();
+                  
+                  }
+                  catch(e)
+                  {
+                    console.log(e);
+                  }
+                }}>
                   <img
                     src={require("../assets/exit.svg")}
                     className="aspect-1 "
