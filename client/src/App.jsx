@@ -20,7 +20,7 @@ export const AppProvider = ({ children }) => {
   const [isSignedIn, setIsSignedIn] = useState(false);
 
   return (
-    <AppContext.Provider value={isSignedIn}>{children}</AppContext.Provider>
+    <AppContext.Provider  value={{isSignedIn,setIsSignedIn}}>{children}</AppContext.Provider>
   );
 };
 

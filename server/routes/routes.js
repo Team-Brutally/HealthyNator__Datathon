@@ -14,6 +14,6 @@ router.post("/sendmail", sendmail);
 
 // Gemini AI routes
 router.post("/ai", GeminiApi);
-router.get("/history", GeminiWithHistory);
+router.post("/history", GeminiWithHistory);
 
 export default router;

@@ -7,7 +7,7 @@ const patientSchema = mongoose.Schema({
     height: {type: Number,required:true},
     weight: {type: Number,required:true},
     contactno: {type: Number,required:true},
-    address: {type: String,required:true},
+    address: {type: String},
     bloodgroup: {type: String,required:true},
     allergies: [String],
     medicalhistory: [String],
