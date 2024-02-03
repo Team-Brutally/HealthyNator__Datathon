@@ -18,10 +18,54 @@ export const useAppContext = () => useContext(AppContext);
 
 export const AppProvider = ({ children }) => {
   const [isSignedIn, setIsSignedIn] = useState(false);
-  const [appUser,setAppUser] = useState(null);
+  const [appUser, setAppUser] = useState(null);
+
+  const [docList, setDocList] = useState([
+    {
+      docName: "Dr. Sneha Patel",
+      docimg: "/docimg2.jpg",
+      qualification: ["MBBS", "MS"],
+      specialization: ["Cardiologist", "Internal Medicine"],
+      rating: 92,
+      numberOfPatientsTreated: 150,
+      price: 2500,
+      experience: "20",
+    },
+    {
+      docName: "Dr. Rahul Sharma",
+      docimg: "/docimg3.jpg",
+      qualification: ["MBBS", "DM"],
+      specialization: ["Neurologist", "Psychiatrist"],
+      rating: 88,
+      numberOfPatientsTreated: 180,
+      price: 3000,
+      experience: "18",
+    },
+    {
+      docName: "Dr. Priya Gupta",
+      docimg: "/docimg2.jpg",
+      qualification: ["MBBS", "MD"],
+      specialization: ["Dermatologist", "Allergist"],
+      rating: 94,
+      numberOfPatientsTreated: 120,
+      price: 1800,
+      experience: "22",
+    },
+  ]);
 
   return (
-    <AppContext.Provider  value={{isSignedIn,setIsSignedIn,appUser,setAppUser}}>{children}</AppContext.Provider>
+    <AppContext.Provider
+      value={{
+        isSignedIn,
+        setIsSignedIn,
+        appUser,
+        setAppUser,
+        docList,
+        setDocList,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
   );
 };
 
