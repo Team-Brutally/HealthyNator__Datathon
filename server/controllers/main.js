@@ -110,6 +110,7 @@ export const getDoctors = async (req, res) => {
   }
 };
 
+
 export const createDoctor = async (req, res) => {
   const {
     name,
@@ -176,3 +177,15 @@ export const createDoctor = async (req, res) => {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
+
+
+export const getCustomPatient = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const patient = await Patient.findById({email: id})
+    res.status(200).json(patient);
+  }
+  catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+}
