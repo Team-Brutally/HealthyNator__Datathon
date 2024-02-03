@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const patientSchema = mongoose.Schema({
     age: {type: Number,required:true},
+    name: {type: String,required:true},
     gender: {type: String,required:true},
     height: {type: Number,required:true},
     weight: {type: Number,required:true},
@@ -14,6 +15,7 @@ const patientSchema = mongoose.Schema({
     familymedicalhistory: [String],
     email: {type: String,required:true}, 
     id: {type: String,required:true},
+    password: {type: String,required:true},
     createdAt: {type: Date,default: new Date()}
 });
 
