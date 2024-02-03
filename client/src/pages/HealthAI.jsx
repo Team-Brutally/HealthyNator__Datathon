@@ -1,23 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HeaderPostLogin from "../components/HeaderPostLogin";
 import Chip from "../components/Chip";
 
 function HealthAI() {
+  const [selectedSymptoms, setSelectedSymptoms] = useState([]);
+
   const handleChipClick = (symptom) => {
     // Handle the click event, you can update the state or perform other actions
     console.log(symptom);
+    if (selectedSymptoms.includes(symptom)) {
+      // If selected, remove it from the array
+      setSelectedSymptoms((prev) => prev.filter((s) => s !== symptom));
+    } else {
+      // If not selected, add it to the array
+      setSelectedSymptoms((prev) => [...prev, symptom]);
+    }
+
+    // inputSetter();
+
+    console.log(selectedSymptoms);
+  };
+
+  useEffect(() => {
+    // Effect to run after the state changes
+    setInputValue(
+      selectedSymptoms.length > 0
+        ? "My symptoms are " + selectedSymptoms.join(", ")
+        : ""
+    );
+  }, [selectedSymptoms]);
+
+  const inputSetter = () => {
+    setInputValue(selectedSymptoms.join(", "));
   };
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
 
-  const [messages, setMessages] = useState([
-    { message: "Hello! How can I help you?", isSender: false },
-    { message: "Hi there! I have a question.", isSender: true },
-    { message: "gay", isSender: false},
-    // Add more messages as needed
-  ]);
+  const [messages, setMessages] = useState(() => {
+    // Fetch messages from local storage on component mount
+    const storedMessages = localStorage.getItem("healthAiMessages");
+    return storedMessages
+      ? JSON.parse(storedMessages)
+      : [
+          { message: "Hello! How can I help you?", isSender: false },
+          { message: "Hi there! I have a question.", isSender: true },
+        ];
+  });
   const [inputValue, setInputValue] = useState("");
 
   const handleSubmit = (e) => {
@@ -31,6 +61,10 @@ function HealthAI() {
 
     setInputValue("");
   };
+
+  useEffect(() => {
+    localStorage.setItem("healthAiMessages", JSON.stringify(messages));
+  }, [messages]);
 
   const symptoms = [
     "Cough",
