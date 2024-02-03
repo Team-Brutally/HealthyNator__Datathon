@@ -352,7 +352,7 @@ const UserHome = () => {
                     {
                       const userObj = await axios.post('http://localhost:3000/users/patients', user, {
                         headers: {
-                          'Access-Control-Allow-Origin': 'http://localhost:5174',
+                          'Access-Control-Allow-Origin': 'http://localhost:5173',
                           'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
                           'Access-Control-Allow-Headers': 'Content-Type',
                           
