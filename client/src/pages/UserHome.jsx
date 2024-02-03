@@ -8,6 +8,7 @@ import { useAppContext } from "../App";
 import MenuItem from "@mui/material/MenuItem";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import InputAdornment from '@mui/material/InputAdornment';
+import { useNavigate } from "react-router-dom";
 
 const initialPatientState = {
   age: 0,
@@ -36,6 +37,7 @@ const UserHome = () => {
   const [isSignUp, setIsSignUp] = useState(true);
 
   const [userFlow, setUserFlow] = useState(1);
+  const navigate = useNavigate();
 
   const textFieldInputProps = {
     style: {
@@ -296,15 +298,6 @@ const UserHome = () => {
 
             
 
-
-
-
-              
-
-
-
-
-
               <p className="text-end text-xs text-[#C7C7C7]">
                 Recover Password?
               </p>
@@ -335,11 +328,11 @@ const UserHome = () => {
                   }
                   else
                   {
-                    console.log(user);
+                    navigate('/home');
                   }
                 }
                 else{
-                  console.log(user);
+                  navigate('/home');  
                 }
               }}>
                 {isSignUp ? "Sign Up" : "Sign In"}
