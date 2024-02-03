@@ -12,16 +12,21 @@ function UserProfile() {
     age: 7,
     gender: "Prefer not to say",
     bloodGroup: "N/A",
-    height: "5’ 4’’",
-    weight: "164 kg",
+    height: 160,
+    weight: 100,
     allergies: "Intellectualness",
     address: "Hiranandalani Medows, Thane, Maharashtra, India",
   };
 
+  let bmi = (userDetails.weight / userDetails.height / userDetails.height) * 10000;
+  userDetails.bmi = bmi.toFixed(2).toString() + " kg/m^2";
+  userDetails.height = userDetails.height + " cm";
+  userDetails.weight = userDetails.weight + " kg";
+
   return (
     <div>
       <HeaderPostLogin name="Parth Bhanushali" />
-      <div className="w-[100vw] h-[80vh] flex items-center justify-center mt-10">
+      <div className="w-[100vw] min-h-[80vh] max-h-full flex items-center justify-center mt-10">
 
         
         <div className="flex flex-row gap-x-4 h-full mx-24 text-[21px]">
@@ -64,7 +69,7 @@ function UserProfile() {
                 <Link to="/myappointments"> Check Appointments</Link>
               </button>
             </div>
-            <div className="rounded-[32px] w-full h-[86vh] bg-[#222222] px-16 py-16">
+            <div className="rounded-[32px] w-full  min-h-max bg-[#222222] px-16 py-16">
               History here please
             </div>
           </div>
