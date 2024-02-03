@@ -2,28 +2,59 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import { Button, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
+import {useState} from 'react';
+import { AppProvider } from "../App";
+import { useAppContext } from "../App";
+import MenuItem from "@mui/material/MenuItem";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import InputAdornment from '@mui/material/InputAdornment';
+
+const initialPatientState = {
+  age: 0,
+  name: "",
+  gender: "",
+  height: 0,
+  weight: 0,
+  contactno: 0,
+  address: "",
+  bloodgroup: "",
+  allergies: [],
+  medicalhistory: [],
+  currentmedication: [],
+  familymedicalhistory: [],
+  email: "",
+  id: "",
+  password: "",
+  createdAt: new Date(),
+};
 
 const UserHome = () => {
+  const [user, setUser] = useState(initialPatientState);
+  
+  const {isSigned}=useAppContext();
+  const [isSignUp, setIsSignUp] = useState(true);
+
+  const [userFlow, setUserFlow] = useState(1);
+
   const textFieldInputProps = {
     style: {
-      width: "450px", // Set your desired width
-      backgroundColor: "#101010", // Set the background color to white
-      color: "#ffffff",
-      borderBottomWidth: "1px",
-      borderColor: "white",
+      width: "450px", 
+      backgroundColor: "#101010", 
+      color: "#fff",
+      borderBottom: "1px solid #fff",
     },
   };
 
   const textFieldInputLabelProps = {
     style: {
-      color: "white", // Set the label text color to white
+      color: "white", 
     },
   };
 
   return (
-    <div>
+    <div className="pb-24">
       <Navbar />
-      <div className="w-[100vw] h-[80vh] flex items-center justify-center  mt-24">
+      <div className="w-[100vw] h-[80vh] flex items-center justify-center mt-24">
         {/* Blur bg  */}
 
         <div className=" absolute top-[100px] left-[60%] ">
@@ -49,14 +80,20 @@ const UserHome = () => {
             </p>
 
             <div className="w-full h-full flex flex-col gap-y-6">
+            {userFlow===1 && (
+              <>
               <TextField
                 id="outlined-basic"
-                label="E-Mail"
+                label="E-mail"
                 placeholder="Enter your email"
                 variant="filled"
                 InputProps={textFieldInputProps}
                 InputLabelProps={textFieldInputLabelProps}
                 required={true}
+                onChange={(e)=>{
+                  setUser({...user,email:e.target.value})
+                }}
+                value={user.email}
               />
 
               <TextField
@@ -67,12 +104,205 @@ const UserHome = () => {
                 InputProps={textFieldInputProps}
                 InputLabelProps={textFieldInputLabelProps}
                 required={true}
+                onChange={(e)=>{
+                  setUser({...user,password:e.target.value})
+                }}
+                type='password'
+                value={user.password}
               />
+              </>
+            )}
+              {isSignUp && (
+                <>
+                {userFlow===1 && (
+              <TextField
+                id="outlined-basic"
+                label="Confirm Password"
+                variant="filled"
+                placeholder="Enter your password"
+                InputProps={textFieldInputProps}
+                InputLabelProps={textFieldInputLabelProps}
+                required={true}
+                onChange={(e)=>{setUser({...user,password:e.target.value})}}
+                type='password'
+              />  
+              )}
+              
+            {userFlow===2 && (
+              <>
+              <TextField
+              id="gender"
+              label="Gender"
+              variant="filled"
+              select
+              value={user.gender}
+              required={true}
+              onChange={(e)=>{
+                setUser({...user,gender:e.target.value})
+              }}
+              InputProps={textFieldInputProps}
+              InputLabelProps={textFieldInputLabelProps}
+              SelectProps={{
+                IconComponent: ArrowDropDownIcon,
+                style: { color: "white",borderBottom:'1px solid #fff'}, 
+              }}
+            
+            >
+              <MenuItem value="male">Male</MenuItem>
+              <MenuItem value="female">Female</MenuItem>
+              <MenuItem value="other">Other</MenuItem>
+            </TextField>
+
+              <TextField
+                  id="bloodgroup"
+                  label="Blood Group"
+                  variant="filled"
+                  select
+                  required
+                  value={user.bloodgroup}
+                  
+                
+                  InputProps={textFieldInputProps}
+                InputLabelProps={textFieldInputLabelProps}
+                SelectProps={{
+                  IconComponent: ArrowDropDownIcon,
+                  style: { color: "white",borderBottom:'1px solid #fff'}, 
+                }}
+                onChange={(e)=>{
+                  setUser({...user,bloodgroup:e.target.value})
+                }}
+
+                >
+                  <MenuItem value="A+">A+</MenuItem>
+                  <MenuItem value="A-">A-</MenuItem>
+                  <MenuItem value="B+">B+</MenuItem>
+                  <MenuItem value="B-">B-</MenuItem>
+                  <MenuItem value="O+">O+</MenuItem>
+                  <MenuItem value="O-">O-</MenuItem>
+                  <MenuItem value="AB+">AB+</MenuItem>
+                  <MenuItem value="AB-">AB-</MenuItem>
+                </TextField>
+
+              <TextField
+                id="contactno"
+                label="Contact Number"
+                value={user.contactno}
+                variant="filled"
+                placeholder="Enter your contact number"
+                InputProps={textFieldInputProps}
+                InputLabelProps={textFieldInputLabelProps}
+                required={true}
+                onChange={(e)=>{
+                  setUser({...user,contactno:e.target.value})
+                }}
+              />
+
+              <TextField
+                id="address"
+                label="Address"
+                variant="filled"
+                value={user.address}
+                placeholder="Enter your address"
+                InputProps={textFieldInputProps}
+                InputLabelProps={textFieldInputLabelProps}
+                required={true}
+                onChange={(e)=>
+                {
+                  setUser({...user,address:e.target.value})
+                }}
+              />
+              
+              <TextField
+                id="age"
+                label="Age"
+                variant="filled"
+                value={user.age}
+                placeholder="Enter your age"
+                InputProps={textFieldInputProps}
+                InputLabelProps={textFieldInputLabelProps}
+                required={true}
+                onChange={(e)=>{
+                  setUser({...user,age:e.target.value})
+                }}
+              />
+            
+              <TextField
+                id="height"
+                label="Height"
+                value={user.height}
+                variant="filled"
+                placeholder="Enter your height"
+                InputProps={textFieldInputProps}
+                InputLabelProps={textFieldInputLabelProps}
+                required={true}
+                onChange={(e)=>{
+                  setUser({...user,height:e.target.value})
+                }}
+              />
+
+              <TextField
+                id="weight"
+                label="Weight"
+                variant="filled"
+                value={user.weight}
+                placeholder="Enter your weight"
+                InputProps={textFieldInputProps}
+                InputLabelProps={textFieldInputLabelProps}
+                required={true}
+                onChange={(e)=>{
+                  setUser({...user,weight:e.target.value})
+                }}
+              />
+
+              <TextField
+                id="allergies"
+                label="Allergies"
+                value={user.allergies.join(',')}
+                variant="filled"
+                placeholder="Enter your allergies with comma separated values"
+                InputProps={textFieldInputProps}
+                InputLabelProps={textFieldInputLabelProps}
+                required={true}
+                onChange={(e)=>{
+                  setUser({...user,allergies:e.target.value.split(',')})
+                }}
+              />
+               </>
+          )}
+              </>
+              )
+          }
+                
+
+
+            
+
+
+
+
+              
+
+
+
+
+
               <p className="text-end text-xs text-[#C7C7C7]">
                 Recover Password?
               </p>
-              <button className="w-full bg-[#4461F2] mt-10 rounded-lg h-[8%] font-bold ">
-                Sign In
+              <button className="w-full bg-[#4461F2] mt-10 rounded-lg h-[8%] font-bold" onClick={()=>{
+                if(isSignUp){
+                  if(userFlow===1){
+                    setUserFlow(2);
+                  }
+                  else if(userFlow===2){
+                    console.log(user);
+                  }
+                }
+                else{
+                  console.log(user);
+                }
+              }}>
+                {isSignUp ? "Sign Up" : "Sign In"}
               </button>
             </div>
           </div>
@@ -83,13 +313,18 @@ const UserHome = () => {
                 <p>your Health </p>
               </div>
               <div className="text-xl mt-16 text-start">
-                <p>if you don't have an account </p>
+                <p>{isSignUp?'I already have an account':' If you dont have an account '} </p>
 
                 <p>
                   you can
-                  <Link to="/">
-                    <span className="text-[#4461F2]"> Register here</span>
-                  </Link>
+                  <button onClick={() => {
+                    if(userFlow===2){
+                      setUserFlow(1);
+                    }
+                    setIsSignUp(!isSignUp)
+                  }}>
+                    <span className="text-[#4461F2]">&nbsp; {isSignUp ? ' Sign in':' Register here'}</span>
+                  </button>
                 </p>
               </div>
             </div>
