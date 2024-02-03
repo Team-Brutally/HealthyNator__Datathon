@@ -1,0 +1,253 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz@6..12&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz@6..12&family=Roboto&display=swap');
+
+:root {
+  --navbar-gap: 1em;
+  --navbar-height: 100px;
+  --navbar-container-width: 98%;
+  --navbar-title-gap: 3em;
+  --nav-font-family: "Nunito Sans", sans-serif;
+}
+
+body
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nunito Sans', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Outer Div */
+.navHolder {
+  width: 100%;
+  height: var(--navbar-height);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar Container */
+.navbarContainer {
+  width: var(--navbar-container-width);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--navbar-gap);
+  padding-left: 6%;
+  padding-right: 5%;
+}
+
+/* Links of the Navbar */
+.navbarTitle {
+  color: #ffffff;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--navbar-title-gap);
+  font-family: var(--nav-font-family);
+}
+
+.navbarTitle a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* Mobile Navbar Button */
+
+.navbarMobileButton {
+  display: none;
+}
+
+.navbarImage {
+  width: 200px;
+}
+
+/* Book a Demo Button */
+#bookDemo {
+  background-color: #22c38a;
+  width: 150px;
+  height: 42px;
+  border-radius: 21px;
+  border: 0;
+  font-family: var(--nav-font-family);
+  color: white;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#bookDemo:hover {
+  background-color: #1ead7a;
+}
+
+.buttonContainer {
+  display: none;
+}
+
+.logoContainer {
+  cursor: pointer;
+}
+
+.signBut{
+  border-style: solid;
+  border-width: 3px;
+  border-color: #00FF38;
+  border-radius: 32px;
+  padding: 5px 10px 5px 10px;
+  background: linear-gradient(180deg, #00CB2D, #6DFF8D);
+}
+
+@media screen and (max-width: 1023px) {
+  .navbarHolder {
+    height: 100px;
+    justify-content: flex-end;
+  }
+
+  .socialLogo
+  {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .navbarContainer {
+    flex-wrap: wrap;
+    padding: 0;
+    height: 80%;
+  }
+
+  .navbarTitle {
+    order: 3;
+    width: 100%;
+    height: calc(100vh - 100px);
+    margin-top: -20px;
+    background-color: white;
+    animation: navbarTitleEntry 0.5s ease;
+  }
+  .navbarMobileButton {
+    display: block;
+    order: 2;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  .navbarImage {
+    width: 150px;
+  }
+
+  .navbarButton {
+    display: block;
+    width: 30px;
+    opacity: 0.5;
+    transition: opacity 0.5s ease-in;
+  }
+
+  .navbarButton:hover {
+    opacity: 1;
+  }
+
+  .buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .navbarTitle {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 20px;
+    width: 100%;
+  }
+
+  .logoContainer {
+    width: 50%;
+    margin: 20px;
+  }
+
+  #bookDemo {
+    font-size: 20px;
+    width: 150px;
+    margin-left: -10px;
+  }
+
+  .navbarTitle > a {
+    font-size: 20px;
+  }
+
+  .mobileMenuClose {
+    display: none;
+  }
+
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  .socialData
+  {
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .downloadData
+  {
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .connectus
+  {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .downloadApp
+  {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    width: 100%;
+  }
+
+  .downloadAppLogo
+  {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+
+}
+
+@media screen and (max-width:290px) {
+  .downloadAppLogo
+  {
+    grid-template-columns: 1fr;
+  }
+}
+
+@keyframes navbarTitleEntry {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

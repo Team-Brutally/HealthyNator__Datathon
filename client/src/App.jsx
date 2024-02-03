@@ -1,12 +1,37 @@
-import { useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
 import "./App.css";
+import { createRoot } from "react-dom/client";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Link,
+} from "react-router-dom";
+import router from "./configs/router";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
-function App() {
-  const [count, setCount] = useState(0);
+const AppContext = createContext();
+
+export const useAppContext = () => useContext(AppContext);
+
+export const AppProvider = ({ children }) => {
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
   return (
+    <AppContext.Provider value={isSignedIn}>{children}</AppContext.Provider>
+  );
+};
+
+function App() {
+  return (
     <>
-      <div className="text-center text-3xl text-red-500">Hello World!</div>
+      <AppProvider>
+        <GoogleOAuthProvider clientId="602618820652-l0bcbouum7jbjanknfb0r2s7gk9phd9r.apps.googleusercontent.com">
+          <RouterProvider router={router} />
+        </GoogleOAuthProvider>
+      </AppProvider>
     </>
   );
 }
