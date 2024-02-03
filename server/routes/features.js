@@ -4,8 +4,8 @@ import sendmail from "../controllers/mailer.js";
 
 const router = express.Router();
 
-router.get('/mailer',sendmail);
+router.post('/mailer',sendmail);
 
-router.get('/pdfgenerate',generatePDF);
+router.post('/pdfgenerate',generatePDF);
 
 export default router;
