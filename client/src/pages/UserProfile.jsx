@@ -27,11 +27,11 @@ function UserProfile() {
             </div>
           </div>
           <div className="flex flex-col gap-[3vh]"> 
-            <div className="flex flex-row gap-[5vw] text-[36px] font-bold">
-              <button className="rounded-[16px] border-4 border-[#CCFFBA] bg-gradient-to-br from-[#0EFD35] to-[#97FFA8] px-16 py-3">Chat with AI</button>
-              <button className="border-4 border-[#ffffff] rounded-[16px] px-4 py-3">Check Appointments</button>
+            <div className="flex flex-row gap-[3vw] text-[36px] font-black">
+              <button className="rounded-[16px] border-2 border-[#CCFFBA] bg-gradient-to-br from-[#0EFD35] to-[#97FFA8] px-[5.1vw] py-0.5">Chat with AI</button>
+              <button className="bg-[#2a2a2a] border-2 border-[#ffffff] rounded-[16px] px-4 py-0.5">Check Appointments</button>
             </div>
-            <div className="rounded-[32px] w-[53vw] h-[81.5vh] bg-[#222222]">
+            <div className="rounded-[32px] w-[52vw] h-[86vh] bg-[#222222] px-16 py-16">
               History here please
             </div>
           </div>
