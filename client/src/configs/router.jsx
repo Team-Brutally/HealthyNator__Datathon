@@ -21,16 +21,24 @@ const router = createBrowserRouter([
 
   {
     path: "/sign",
-    element: <UserHome/>,
+    element: <UserHome />,
+  },
+  {
+    path: "/ai",
+    element: <HealthAI />,
   },
   {
     path: "/myappointments",
     element: <MyAppointments />,
   },
   {
+    path: "/home",
+    element: <UserProfile />,
+  },
+  {
     path: "*",
     element: <h1>Not Found</h1>,
-  }
+  },
 ]);
 
 export default router;
