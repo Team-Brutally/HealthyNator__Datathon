@@ -8,7 +8,9 @@ const UserHome = () => {
     style: {
       width: "450px", // Set your desired width
       backgroundColor: "#101010", // Set the background color to white
-      color: "#fff",
+      color: "#ffffff",
+      borderBottomWidth: "1px",
+      borderColor: "white",
     },
   };
 
