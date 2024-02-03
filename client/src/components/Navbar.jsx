@@ -51,7 +51,7 @@ function Navbar() {
         </div>
         <div className="navGap"></div>
         <ul
-          className={`navbarTitle ${isMobileMenuOpen ? "" : "mobileMenuClose"}`}
+          className={`navbarTitle z-[100] ${isMobileMenuOpen ? "backdrop-blur-xl bg-inherit" : "mobileMenuClose"}`}
         >
           <ScrollLink to="/" onClick={toggleMobileMenu} style={{
             cursor: 'pointer'
