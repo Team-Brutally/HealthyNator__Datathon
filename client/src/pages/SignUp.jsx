@@ -1,11 +1,8 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import "../css/SignUp.css";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 const bloodgroups = [
   { value: "A+", label: "A+" },
@@ -27,7 +24,9 @@ function SignUp() {
     style: {
       width: "450px", // Set your desired width
       backgroundColor: "#101010", // Set the background color to white
-      color: "#fff",
+      color: "#fffff",
+      borderBottomWidth: "1px",
+      borderColor: "white",
     },
   };
 
