@@ -22,6 +22,8 @@ function UserProfile() {
     <div>
       <HeaderPostLogin name="Parth Bhanushali" />
       <div className="w-[100vw] h-[80vh] flex items-center justify-center mt-10">
+
+        
         <div className="flex flex-row gap-x-4 h-full mx-24 text-[21px]">
           <div
             className="flex flex-col gap-[2vh] bg-[#222222] px-5 py-4 rounded-[32px]"

@@ -4,26 +4,28 @@
 
 /* For Webkit browsers (Chrome, Safari) */
 
-    ::-webkit-scrollbar {
+::-webkit-scrollbar {
+  width: 9px; /* Set the width of the scrollbar */
+}
 
-      
-        width: 9px; /* Set the width of the scrollbar */
-      }
-      
-      ::-webkit-scrollbar-thumb {
-        background-color: #4BD472; /* Color of the scrollbar thumb */
-        border-radius: 10px; /* Radius of the scrollbar thumb corners */
-      }
-      
-      ::-webkit-scrollbar-track {
-        background-color: #ccc; /* Color of the scrollbar track */
-      }
-      
-  
-  .rainbow > div {
-    filter: blur(64px);
-  }
+::-webkit-scrollbar-thumb {
+  background-color: #4bd472; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Radius of the scrollbar thumb corners */
+}
 
-  .rainbow2 > div {
-    filter: blur(128px);
-  }
+::-webkit-scrollbar-track {
+  background-color: #ccc; /* Color of the scrollbar track */
+}
+
+.rainbow > div {
+  filter: blur(64px);
+}
+
+.rainbow2 > div {
+  filter: blur(128px);
+}
+
+.glassmorph {
+  background: rgba(34, 34, 34, 0.4);
+  backdrop-filter: blur(10px);
+}
