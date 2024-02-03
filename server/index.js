@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import postRoutes from "./routes/routes.js";
 import userRoutes from "./routes/users.js";
+import featuresRoutes from "./routes/features.js";
 
 const app = express();
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors(corsOptions));
 app.use("/", postRoutes);
 app.use("/users", userRoutes);
+app.use.use('/features',featuresRoutes);
 
 const connection_url = process.env.CONNECTION_URL;
 
