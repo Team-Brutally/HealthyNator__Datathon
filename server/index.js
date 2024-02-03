@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors(corsOptions));
 app.use("/", postRoutes);
 app.use("/users", userRoutes);
-app.use.use('/features',featuresRoutes);
+app.use('/features',featuresRoutes);
 
 const connection_url = process.env.CONNECTION_URL;
 
