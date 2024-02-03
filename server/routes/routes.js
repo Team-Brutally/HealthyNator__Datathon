@@ -1,7 +1,6 @@
 import express from "express";
 import GeminiApi from "../controllers/gemini.js";
 import { GeminiWithHistory } from "../controllers/gemini.js";
-import sendmail from "../controllers/mailer.js";
 
 const router = express.Router();
 
