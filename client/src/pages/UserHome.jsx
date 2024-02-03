@@ -92,6 +92,21 @@ const UserHome = () => {
               <>
               <TextField
                 id="outlined-basic"
+                label="name"
+                placeholder="Enter Your Full name"
+                variant="filled"
+                InputProps={textFieldInputProps}
+                InputLabelProps={textFieldInputLabelProps}
+                required={true}
+                onChange={(e)=>{
+                  setUser({...user,name:e.target.value})
+                  console.log(user);
+                }}
+                value={user.name}
+                type='string'
+              />
+              <TextField
+                id="outlined-basic"
                 label="E-mail"
                 placeholder="Enter your email"
                 variant="filled"
@@ -99,7 +114,7 @@ const UserHome = () => {
                 InputLabelProps={textFieldInputLabelProps}
                 required={true}
                 onChange={(e)=>{
-                  setUser({...user,email:e.target.value})
+                  setUser({...user,email:e.target.value, id:e.target.value})
                   console.log(user);
                 }}
                 value={user.email}
@@ -337,7 +352,7 @@ const UserHome = () => {
                     {
                       const userObj = await axios.post('http://localhost:3000/users/patients', user, {
                         headers: {
-                          'Access-Control-Allow-Origin': '*',
+                          'Access-Control-Allow-Origin': 'http://localhost:5174',
                           'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
                           'Access-Control-Allow-Headers': 'Content-Type',
                           
