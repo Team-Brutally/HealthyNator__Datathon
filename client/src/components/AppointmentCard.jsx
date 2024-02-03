@@ -29,7 +29,6 @@ const AppointmentCard = ({ disabled, onClick, className }) => {
             <p>Urologist</p>
             <p>Testicular Torsion</p>
           </div>
-          <p className="font-medium text-xl">25 Years+</p>
         </div>
       </div>
       <div className="h-[50%] w-full  px-4 flex flex-col justify-center items-start gap-y-2">
@@ -41,6 +40,10 @@ const AppointmentCard = ({ disabled, onClick, className }) => {
           <div className="flex gap-x-4 items-center  px-4 ">
             <img src={require("../assets/cashicon.png")} className="h-6"></img>
             <p className="text-sm ">₹2000 /Appointment</p>
+          </div>
+          <div className="flex gap-x-4 items-center  px-4 ">
+            <img src={require("../assets/cashicon.png")} className="h-6"></img>
+            <p className="text-sm ">25 Years+ Exp</p>
           </div>
         </div>
         {confirmCancel ? (
@@ -77,6 +80,7 @@ const AppointmentCard = ({ disabled, onClick, className }) => {
             onClick={() => {
               if (!disabled) setConfirmCancel(!confirmCancel);
             }}
+            disabled={cancelled}
           >
             {cancelled ? "Cancelled" : "Cancelled Appoinment"}
           </button>

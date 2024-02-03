@@ -10,10 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.7",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.14",
     "@react-oauth/google": "^0.12.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.3",
+    "styled-components": "^6.1.8",
     "vite-plugin-require": "^1.1.14"
   },
   "devDependencies": {

@@ -4,7 +4,8 @@ import Layout from "../pages/Layout/Layout";
 // import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import MyAppointments from "../pages/MyAppointments";
-import Login from "../pages/Login";
+// import Login from "../pages/Login";
+import UserHome from "../pages/UserHome";
 
 const router = createBrowserRouter([
   {
@@ -31,8 +32,8 @@ const router = createBrowserRouter([
     element: <h1>Not Found</h1>,
   },
   {
-    path: "/login",
-    element: <Login />,
+    path: "/userhome",
+    element: <UserHome />,
   },
 ]);
 

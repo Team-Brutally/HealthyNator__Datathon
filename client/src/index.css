@@ -20,3 +20,10 @@
       }
       
   
+  .rainbow > div {
+    filter: blur(64px);
+  }
+
+  .rainbow2 > div {
+    filter: blur(128px);
+  }
