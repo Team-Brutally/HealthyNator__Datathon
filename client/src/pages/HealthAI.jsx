@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import HeaderPostLogin from "../components/HeaderPostLogin";
 import Chip from "../components/Chip";
+import ReactMarkdown from "react-markdown";
 import axios from "axios";
 
 function HealthAI() {
@@ -61,10 +62,15 @@ function HealthAI() {
     setMessages((prevMessages) => [...prevMessages, msg]);
 
     setInputValue("");
+    // fetchDataWithHistory()
+    // console.log(inputValue);
+    fetchDataWithHistory(inputValue);
   };
 
   useEffect(() => {
-    localStorage.setItem("healthAiMessages", JSON.stringify(messages));
+    setTimeout(() => {
+      localStorage.setItem("healthAiMessages", JSON.stringify(messages));
+    }, 2000);
   }, [messages]);
 
   const symptoms = [
@@ -138,7 +144,7 @@ function HealthAI() {
     "Lacerations",
     "Fatigue",
     "Tinted Nails",
-    "Brittle Nails"
+    "Brittle Nails",
     // Add more symptoms here as needed
   ];
 
@@ -147,19 +153,27 @@ function HealthAI() {
   const fetchDataWithHistory = async (prompt) => {
     try {
       console.log(prompt);
-      const response = await axios.post('http://localhost:3000/history', { prompt });
+      const response = await axios.post("http://localhost:3000/history", {
+        prompt,
+      });
       console.log(response.data); // Log the response data
       // Handle the response here
+      const modelResponse = {
+        message: response.data.response,
+        isSender: false,
+      };
+      console.log(modelResponse);
+      setMessages((prevMessages) => [...prevMessages, modelResponse]);
     } catch (error) {
       console.error(error); // Log the error
       // Handle the error here
     }
   };
 
-  useEffect(() => {
-    fetchDataWithHistory("I am having ulcers in my mouth");
-  }
-  , []);
+  // useEffect(() => {
+  //   fetchDataWithHistory("I am having ulcers in my mouth");
+  // }
+  // , []);
   return (
     <div>
       <HeaderPostLogin name="Parth B" />
@@ -198,20 +212,20 @@ function HealthAI() {
                         key={index}
                       >
                         <div
-                          className="bg-[#2F8953] text-xl rounded-3xl h-fit max-w-[45%] flex items-start justify-start px-8 py-2.5 break-words self-start bg-operator-message-bg text-black"
+                          className="bg-[#2F8953] text-xl rounded-3xl h-fit max-w-[45%] flex flex-col items-start justify-start px-8 py-2.5 break-words self-start bg-operator-message-bg text-black"
                           style={{ borderTopLeftRadius: 0 }}
                         >
-                          {msg.message}
+                          <ReactMarkdown>{msg.message}</ReactMarkdown>
                         </div>
                       </div>
                     );
                   } else if (msg.isSender) {
                     return (
                       <div
-                        className="bg-[#ECECEC] text-xl rounded-3xl h-fit max-w-[45%] flex items-start justify-start px-8 py-2.5 break-words self-end bg-darkOrange text-black  "
+                        className="bg-[#ECECEC] text-xl rounded-3xl h-fit max-w-[45%] flex flex-col items-start justify-start px-8 py-2.5 break-words self-end bg-darkOrange text-black  "
                         style={{ borderTopRightRadius: 0 }}
                       >
-                        {msg.message}
+                        <ReactMarkdown>{msg.message}</ReactMarkdown>
                       </div>
                     );
                   }
@@ -226,15 +240,24 @@ function HealthAI() {
               <input
                 type="text"
                 placeholder="Enter a symptom"
-                className="w-[90%] h-full px-8 outline-none rounded-2xl text-2xl text-black"
+                className="w-[80%] h-full px-8 outline-none rounded-2xl text-2xl text-black"
                 onChange={handleInputChange}
                 value={inputValue}
               />
               <div className="w-[10%] h-full rounded-xl py-6 px-4 flex justify-center items-center">
-                <button className="w-[90%] h-full py-6 bg-[#345B2E] px-4 rounded-2xl">
+                <button className="w-[90%] h-full py-6 bg-[#FF0404] px-4 rounded-2xl flex justify-center items-center">
+                  <img
+                    src={require("../assets/exit.svg")}
+                    className="aspect-1 "
+                    alt=""
+                  />
+                </button>
+              </div>
+              <div className="w-[10%] h-full rounded-xl py-6 mr-2 flex justify-center items-center">
+                <button className="w-[90%] h-full py-6 bg-[#345B2E] px-4 rounded-2xl flex items-center justify-center">
                   <img
                     src={require("../assets/send-2.svg")}
-                    className="h-full w-full "
+                    className="  aspect-1"
                     alt=""
                   />
                 </button>
