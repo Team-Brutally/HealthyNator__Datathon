@@ -1,6 +1,6 @@
 import express from "express";
 import GeminiApi from "../controllers/gemini.js";
-import GeminiWithHistory from "../controllers/gemini.js";
+import { GeminiWithHistory } from "../controllers/gemini.js";
 
 const router = express.Router();
 
@@ -9,6 +9,6 @@ router.get("/", (req, res) => {
 });
 
 router.post("/ai", GeminiApi);
-router.post("/history", GeminiWithHistory);
+router.get("/history", GeminiWithHistory);
 
 export default router;

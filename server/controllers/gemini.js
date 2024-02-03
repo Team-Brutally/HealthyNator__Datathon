@@ -57,9 +57,10 @@ const GeminiApi = async (req, res) => {
   }
 };
 
-const GeminiWithHistory = async (req, res) => {
-  const { GoogleGenerativeAI } = require("@google/generative-ai");
 
+export const GeminiWithHistory = async (req, res) => {
+
+console.log("Hello");
   // Access your API key as an environment variable (see "Set up your API key" above)
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
@@ -84,7 +85,6 @@ const GeminiWithHistory = async (req, res) => {
     });
 
     const msg = "How many paws are in my house?";
-
     const result = await chat.sendMessage(msg);
     const response = await result.response;
     const text = response.text();
