@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "../css/UserProfile.css";
 import "../components/HeaderPostLogin";
 import Footer from "../components/Footer";
 import HeaderPostLogin from "../components/HeaderPostLogin";
