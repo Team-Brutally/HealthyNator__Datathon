@@ -62,17 +62,20 @@ function Navbar() {
             cursor: 'pointer'
           }}>About
           </p></ScrollLink>
-          <ScrollLink to="/sign" id="signUp" onClick={toggleMobileMenu} style={{
-            cursor: 'pointer'
-          }}>
-          <Link to='sign'>
-            <p className="signBut" style={{
-              color:'black'
-            }}>Sign Up</p></Link>
-          </ScrollLink>
-          <Link to="" className="bg-[#fff] rounded-[32px] px-[1vw] py-[0.6vh] border-[#36e55d] border-4" style ={{
-            color: "black",
-          }}>Sign In</Link>
+          <div className="flex flex-row gap-[1.5vh]">
+            <Link to="sign" className="bg-[#fff] rounded-[32px] px-[1vw] py-[0.6vh] border-[#36e55d] border-4" style ={{
+              color: "black",
+            }}>Sign In</Link>
+            <ScrollLink to="/sign" id="signUp" onClick={toggleMobileMenu} style={{
+              cursor: 'pointer'
+            }}>
+            <Link to='sign'>
+              <p className="signBut" style={{
+                color:'black'
+              }}>Sign Up</p></Link>
+            </ScrollLink>
+          </div>
+          
         </ul>
         <div className="buttonContainer">
           <button className="navbarMobileButton" onClick={toggleMobileMenu}>
