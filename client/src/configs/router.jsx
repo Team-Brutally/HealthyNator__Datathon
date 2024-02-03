@@ -6,6 +6,8 @@ import SignUp from "../pages/SignUp";
 import MyAppointments from "../pages/MyAppointments";
 // import Login from "../pages/Login";
 import UserHome from "../pages/UserHome";
+import HealthAI from "../pages/HealthAI";
+import UserProfile from "../pages/UserProfile";
 
 const router = createBrowserRouter([
   {
