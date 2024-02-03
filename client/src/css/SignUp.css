@@ -1,7 +1,3 @@
-.masterSignUp{
-    margin-top: 150px;
-    min-height: calc(100vh - 60px);
-}
 .suCont{
     display: flex;
     flex-direction: column;
@@ -11,7 +7,4 @@
 .suCont > span{
     font-size: 32px;
     font-weight: bold;
-}
-TextField{
-    color: #ffffff;
 }
