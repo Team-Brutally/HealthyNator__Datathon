@@ -8,6 +8,7 @@ import MyAppointments from "../pages/MyAppointments";
 import UserHome from "../pages/UserHome";
 import HealthAI from "../pages/HealthAI";
 import UserProfile from "../pages/UserProfile";
+import BookDoctor from "../pages/BookDoctor";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: <UserProfile />,
+  },
+  {
+    path: "/bookdoc",
+    element: <BookDoctor />,
   },
   {
     path: "*",
