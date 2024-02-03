@@ -18,6 +18,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.3",
+    "react-scroll": "^1.9.0",
     "styled-components": "^6.1.8",
     "vite-plugin-require": "^1.1.14"
   },
@@ -35,5 +36,3 @@
     "vite": "^5.0.12"
   }
 }
-
-

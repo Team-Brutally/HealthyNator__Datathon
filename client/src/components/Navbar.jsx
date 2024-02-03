@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "../css/Navbar.css";
 import { Link } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
+import {Link as ScrollLink} from 'react-scroll';
+
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+  const navigate = useNavigate();
   const [screenSize, setScreenSize] = useState({
     width: undefined,
     height: undefined,
@@ -35,7 +38,9 @@ function Navbar() {
   return (
     <div className="navHolder">
       <div className="navbarContainer">
-        <div className="logoContainer" onClick={() => {}}>
+        <div className="logoContainer" onClick={() => {
+          navigate('/');
+        }}>
           <img
             src="/NavLogo.svg"
             alt=""
@@ -48,13 +53,23 @@ function Navbar() {
         <ul
           className={`navbarTitle ${isMobileMenuOpen ? "" : "mobileMenuClose"}`}
         >
-          <Link to="/" onClick={toggleMobileMenu}>
-            <p className="navbarText">Home</p>
-          </Link>
-          <Link to="" onClick={toggleMobileMenu}><p className="navbarText">About</p></Link>
-          <Link to="/signin" id="signUp" onClick={toggleMobileMenu}>
-            <p className="signBut">Sign Up / Log In</p>
-          </Link>
+          <ScrollLink to="/" onClick={toggleMobileMenu} style={{
+            cursor: 'pointer'
+          }}>
+          <Link><p className="navbarText">Home</p></Link>
+          </ScrollLink>
+          <ScrollLink to="features"  spy={true} smooth={true} duration={500} offset={-50} onClick={toggleMobileMenu}><p className="navbarText" style={{
+            cursor: 'pointer'
+          }}>About
+          </p></ScrollLink>
+          <ScrollLink to="/sign" id="signUp" onClick={toggleMobileMenu} style={{
+            cursor: 'pointer'
+          }}>
+          <Link to='sign'>
+            <p className="signBut" style={{
+              color:'black'
+            }}>Sign Up</p></Link>
+          </ScrollLink>
         </ul>
         <div className="buttonContainer">
           <button className="navbarMobileButton" onClick={toggleMobileMenu}>

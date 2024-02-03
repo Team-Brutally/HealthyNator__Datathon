@@ -18,7 +18,7 @@ function Home() {
         </div>
       </div>
 
-      <div className="masterFeature">
+      <div className="masterFeature" id='features'>
         <div className="featureHead">
           <span>
             <h2>FEATURES WE PROVIDE</h2>
