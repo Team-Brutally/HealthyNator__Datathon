@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const patientSchema = mongoose.Schema({
-    age: {type: Number,required},
+    age: {type: Number,required:true},
     gender: {type: String,required:true},
     height: {type: Number,required:true},
     weight: {type: Number,required:true},
@@ -17,6 +17,5 @@ const patientSchema = mongoose.Schema({
     createdAt: {type: Date,default: new Date()}
 });
 
-const Patient = mongoose.model('Patient', patientSchema);
+export default mongoose.model('Patient', patientSchema);
 
-export default Patient;

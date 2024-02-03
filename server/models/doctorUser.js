@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const doctorSchema = mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true },
-    comtactno: { type: Number, required: true },
+    contactno: { type: Number, required: true },
     address: { type: String, required: true },
     specialisation: { type: [String], required: true },
     experience: { type: Number, required: true },
