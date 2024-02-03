@@ -5,19 +5,14 @@ import sendmail from "../controllers/mailer.js";
 
 const router = express.Router();
 
+// Home route
 router.get("/", (req, res) => {
   res.send("Hello World!");
 });
+// Mailing routes
+router.post("/sendmail", sendmail);
 
-router.get("/mailer", (req, res) => {
-  sendmail(
-    "minavpkaria@gmail.com",
-    "Test Mail from Healthy App",
-    "I am Parth, and I am a good coder."
-  );
-  res.send("Hello World!");
-});
-
+// Gemini AI routes
 router.post("/ai", GeminiApi);
 router.get("/history", GeminiWithHistory);
 
