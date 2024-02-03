@@ -6,8 +6,12 @@
     display: flex;
     flex-direction: column;
     justify-content: left;
+    gap: 2vh;
 }
 .suCont > span{
     font-size: 32px;
     font-weight: bold;
+}
+TextField{
+    color: #ffffff;
 }

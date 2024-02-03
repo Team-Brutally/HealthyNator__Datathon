@@ -8,9 +8,10 @@ const doctorSchema = mongoose.Schema({
     specialisation: { type: [String], required: true },
     experience: { type: Number, required: true },
     id: { type: String, required: true },
+    password: { type: String, required: true },
     joinedOn: { type: Date, required: true },
 });
 
-const Doctor = mongoose.model('Doctor', doctorSchema);
+const Doctor = mongoose.model("Doctor", doctorSchema);
 
 export default Doctor;
