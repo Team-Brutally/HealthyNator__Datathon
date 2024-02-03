@@ -8,7 +8,6 @@ function Layout() {
       <Navbar />
       <div
         style={{
-          marginTop: "150px",
           minHeight: "calc(100vh - 60px)",
         }}
       >
