@@ -8,6 +8,7 @@ import { useAppContext } from "../App";
 import MenuItem from "@mui/material/MenuItem";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import InputAdornment from '@mui/material/InputAdornment';
+import { useNavigate } from "react-router-dom";
 
 const initialPatientState = {
   age: 0,
@@ -29,12 +30,14 @@ const initialPatientState = {
 };
 
 const UserHome = () => {
+  const [confirmPassword,setCPassword]=useState("");
   const [user, setUser] = useState(initialPatientState);
   
   const {isSigned}=useAppContext();
   const [isSignUp, setIsSignUp] = useState(true);
 
   const [userFlow, setUserFlow] = useState(1);
+  const navigate = useNavigate();
 
   const textFieldInputProps = {
     style: {
@@ -92,8 +95,10 @@ const UserHome = () => {
                 required={true}
                 onChange={(e)=>{
                   setUser({...user,email:e.target.value})
+                  console.log(user);
                 }}
                 value={user.email}
+                type='email'
               />
 
               <TextField
@@ -106,6 +111,7 @@ const UserHome = () => {
                 required={true}
                 onChange={(e)=>{
                   setUser({...user,password:e.target.value})
+                   console.log(user);
                 }}
                 type='password'
                 value={user.password}
@@ -123,7 +129,11 @@ const UserHome = () => {
                 InputProps={textFieldInputProps}
                 InputLabelProps={textFieldInputLabelProps}
                 required={true}
-                onChange={(e)=>{setUser({...user,password:e.target.value})}}
+                value={confirmPassword}
+                onChange={(e)=>{
+                  setCPassword(e.target.value)
+                  console.log(user);
+                }}
                 type='password'
               />  
               )}
@@ -139,6 +149,7 @@ const UserHome = () => {
               required={true}
               onChange={(e)=>{
                 setUser({...user,gender:e.target.value})
+                console.log(user);
               }}
               InputProps={textFieldInputProps}
               InputLabelProps={textFieldInputLabelProps}
@@ -170,6 +181,7 @@ const UserHome = () => {
                 }}
                 onChange={(e)=>{
                   setUser({...user,bloodgroup:e.target.value})
+                  console.log(user);
                 }}
 
                 >
@@ -182,7 +194,10 @@ const UserHome = () => {
                   <MenuItem value="AB+">AB+</MenuItem>
                   <MenuItem value="AB-">AB-</MenuItem>
                 </TextField>
-
+                </>
+          )}
+          {userFlow===3 &&(
+            <>
               <TextField
                 id="contactno"
                 label="Contact Number"
@@ -194,6 +209,7 @@ const UserHome = () => {
                 required={true}
                 onChange={(e)=>{
                   setUser({...user,contactno:e.target.value})
+                  console.log(user);
                 }}
               />
 
@@ -209,6 +225,7 @@ const UserHome = () => {
                 onChange={(e)=>
                 {
                   setUser({...user,address:e.target.value})
+                  console.log(user);
                 }}
               />
               
@@ -223,6 +240,7 @@ const UserHome = () => {
                 required={true}
                 onChange={(e)=>{
                   setUser({...user,age:e.target.value})
+                  console.log(user);
                 }}
               />
             
@@ -237,6 +255,7 @@ const UserHome = () => {
                 required={true}
                 onChange={(e)=>{
                   setUser({...user,height:e.target.value})
+                  console.log(user);
                 }}
               />
 
@@ -251,6 +270,7 @@ const UserHome = () => {
                 required={true}
                 onChange={(e)=>{
                   setUser({...user,weight:e.target.value})
+                  console.log(user);
                 }}
               />
 
@@ -265,10 +285,11 @@ const UserHome = () => {
                 required={true}
                 onChange={(e)=>{
                   setUser({...user,allergies:e.target.value.split(',')})
+                  console.log(user);
                 }}
               />
-               </>
-          )}
+              </>
+             )}
               </>
               )
           }
@@ -277,29 +298,41 @@ const UserHome = () => {
 
             
 
-
-
-
-              
-
-
-
-
-
               <p className="text-end text-xs text-[#C7C7C7]">
                 Recover Password?
               </p>
               <button className="w-full bg-[#4461F2] mt-10 rounded-lg h-[8%] font-bold" onClick={()=>{
                 if(isSignUp){
                   if(userFlow===1){
-                    setUserFlow(2);
+                    if(user.password === confirmPassword)
+                    {
+                      if(user.password==='')
+                      {
+                        alert('Password cannot be empty');
+                        return;
+                      }
+                      setUserFlow(2);
+                      console.log('Set to 2')
+                    }
+                    
+                    else
+                    {
+                      alert('Password doesnt match');
+                      return;
+                    }
                   }
-                  else if(userFlow===2){
-                    console.log(user);
+                  else if(userFlow===2)
+                  {
+                    console.log('Set to 3');
+                    setUserFlow(3);
+                  }
+                  else
+                  {
+                    navigate('/home');
                   }
                 }
                 else{
-                  console.log(user);
+                  navigate('/home');  
                 }
               }}>
                 {isSignUp ? "Sign Up" : "Sign In"}
@@ -318,9 +351,10 @@ const UserHome = () => {
                 <p>
                   you can
                   <button onClick={() => {
-                    if(userFlow===2){
+                    if(userFlow===2 ){
                       setUserFlow(1);
                     }
+                    
                     setIsSignUp(!isSignUp)
                   }}>
                     <span className="text-[#4461F2]">&nbsp; {isSignUp ? ' Sign in':' Register here'}</span>
