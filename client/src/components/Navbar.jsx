@@ -62,8 +62,8 @@ function Navbar() {
             cursor: 'pointer'
           }}>About
           </p></ScrollLink>
-          <div className="flex flex-row gap-[1.5vh]">
-            <Link to="sign" className="bg-[#fff] rounded-[32px] px-[1vw] py-[0.6vh] border-[#36e55d] border-4" style ={{
+          <div className="flex flex-row gap-[0vh]">
+            <Link to="sign" className="bg-[#fff] rounded-l-[32px] px-[1vw] pt-[0.7vh] pb-[0.4vh] border-[#36e55d] border-4" style ={{
               color: "black",
             }}>Sign In</Link>
             <ScrollLink to="/sign" id="signUp" onClick={toggleMobileMenu} style={{
@@ -71,7 +71,10 @@ function Navbar() {
             }}>
             <Link to='sign'>
               <p className="signBut" style={{
-                color:'black'
+                color:'black',
+                borderRadius: '0px 32px 32px 0px',
+                borderColor: '#36e55d',
+                borderWidth: '4px'
               }}>Sign Up</p></Link>
             </ScrollLink>
           </div>
