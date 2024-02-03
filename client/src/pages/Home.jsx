@@ -32,7 +32,7 @@ function Home() {
           <span className="featImg">
             <img src="/food.svg"></img>
           </span>
-          <span className="featTit">Medicine Recommendation</span>
+          <span className="featTit">Remedies Recommendation</span>
           <span className="featDes">
             We provide immediate aid recommendations to ease symptoms of a wide
             variety of diseases
