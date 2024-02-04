@@ -42,7 +42,7 @@ function UserProfile() {
       date: "2022-10-10",
       time: "10:00",
       doctor: "Dr. Atharva Upare",
-      hospital: "Scamaiya Hospital",
+      hospital: "Fortis Hospital",
       status: "Confirmed",
       index: 0,
       doctor_img:
@@ -52,7 +52,7 @@ function UserProfile() {
       date: "2022-10-10",
       time: "10:00",
       doctor: "Dr. Minav Karia",
-      hospital: "Somaiya Hospital",
+      hospital: "Max Hospital",
       status: "Confirmed",
       index: 1,
       doctor_img:
@@ -78,7 +78,7 @@ function UserProfile() {
       <div className="w-[100vw] min-h-[80vh] max-h-full flex items-center justify-center mt-10">
         <div className="flex flex-row gap-x-4 h-full mx-24 text-[21px]">
           <div
-            className="flex flex-col gap-[2vh] h-[40%] bg-[#222222] px-5 py-4 rounded-[32px] "
+            className="flex flex-col gap-[2vh] h-[40%] bg-[#222222] px-5 py-4 rounded-[32px] mb-16 "
             style={{ flex: "30%" }}
           >
             <div>
@@ -161,7 +161,7 @@ function UserProfile() {
                 Check Appointments
               </button>
             </div>
-            <div className="rounded-[32px] w-full h-[100%] bg-[#222222] px-16 py-16">
+            <div className="rounded-[32px] w-full h-[100%] bg-[#222222] px-16 py-16 mb-16">
               {
                 history_cards.map((card, index) => (
                   <HomeHistoryCard
