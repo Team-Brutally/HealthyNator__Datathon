@@ -316,7 +316,7 @@ function HealthAI() {
                         );
                       }
                     }
-
+                    console.log('Hello');
                     console.log(input);
 
                     try {
@@ -324,7 +324,7 @@ function HealthAI() {
                       const response = await axios.post(
                         "http://localhost:3000/history",
                         {
-                          prompt: "Give the summary in 5 lines",
+                          prompt: "Give the summary in 5 lines of the data given below without specifying any names"+input,
                           data: input,
                         }
                       );
