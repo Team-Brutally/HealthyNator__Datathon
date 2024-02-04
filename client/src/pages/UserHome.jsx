@@ -2,22 +2,23 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import { Button, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
-import {useState} from 'react';
+import { useState } from "react";
 import { AppProvider } from "../App";
 import { useAppContext } from "../App";
 import MenuItem from "@mui/material/MenuItem";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import InputAdornment from '@mui/material/InputAdornment';
+import InputAdornment from "@mui/material/InputAdornment";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
+import SignUp from "./SignUp";
 
 const initialPatientState = {
-  age: 0,
+  age: null,
   name: "",
   gender: "",
-  height: 0,
-  weight: 0,
-  contactno: 0,
+  height: null,
+  weight: null,
+  contactno: null,
   address: "",
   bloodgroup: "",
   allergies: [],
@@ -31,14 +32,13 @@ const initialPatientState = {
 };
 
 const UserHome = () => {
-  const [confirmPassword,setCPassword]=useState("");
+  const [confirmPassword, setCPassword] = useState("");
   const [user, setUser] = useState(initialPatientState);
 
-  
-  const {isSigned}=useAppContext();
-  const {setIsSignedIn} = useAppContext();
-  const {setAppUser} = useAppContext();
-  const {appUser} = useAppContext();
+  const { isSigned } = useAppContext();
+  const { setIsSignedIn } = useAppContext();
+  const { setAppUser } = useAppContext();
+  const { appUser } = useAppContext();
   const [isSignUp, setIsSignUp] = useState(true);
 
   const [userFlow, setUserFlow] = useState(1);
@@ -46,8 +46,8 @@ const UserHome = () => {
 
   const textFieldInputProps = {
     style: {
-      width: "450px", 
-      backgroundColor: "#101010", 
+      width: "450px",
+      backgroundColor: "#101010",
       color: "#fff",
       borderBottom: "1px solid #fff",
     },
@@ -55,7 +55,7 @@ const UserHome = () => {
 
   const textFieldInputLabelProps = {
     style: {
-      color: "white", 
+      color: "white",
     },
   };
 
@@ -88,290 +88,292 @@ const UserHome = () => {
             </p>
 
             <div className="w-full h-full flex flex-col gap-y-6">
-            {userFlow===1 && (
-              <>
-              <TextField
-                id="outlined-basic"
-                label="name"
-                placeholder="Enter Your Full name"
-                variant="filled"
-                InputProps={textFieldInputProps}
-                InputLabelProps={textFieldInputLabelProps}
-                required={true}
-                onChange={(e)=>{
-                  setUser({...user,name:e.target.value})
-                  console.log(user);
-                }}
-                value={user.name}
-                type='string'
-              />
-              <TextField
-                id="outlined-basic"
-                label="E-mail"
-                placeholder="Enter your email"
-                variant="filled"
-                InputProps={textFieldInputProps}
-                InputLabelProps={textFieldInputLabelProps}
-                required={true}
-                onChange={(e)=>{
-                  setUser({...user,email:e.target.value, id:e.target.value})
-                  console.log(user);
-                }}
-                value={user.email}
-                type='email'
-              />
+              {userFlow === 1 && isSignUp ? (
+                <TextField
+                  id="outlined-basic"
+                  label="Name"
+                  placeholder="Enter Your Full name"
+                  variant="filled"
+                  InputProps={textFieldInputProps}
+                  InputLabelProps={textFieldInputLabelProps}
+                  required={true}
+                  onChange={(e) => {
+                    setUser({ ...user, name: e.target.value });
+                    console.log(user);
+                  }}
+                  value={user.name}
+                  type="string"
+                />
+              ) : null}
+              {userFlow === 1 && (
+                <>
+                  <TextField
+                    id="outlined-basic"
+                    label="E-mail"
+                    placeholder="Enter your email"
+                    variant="filled"
+                    InputProps={textFieldInputProps}
+                    InputLabelProps={textFieldInputLabelProps}
+                    required={true}
+                    onChange={(e) => {
+                      setUser({
+                        ...user,
+                        email: e.target.value,
+                        id: e.target.value,
+                      });
+                      console.log(user);
+                    }}
+                    value={user.email}
+                    type="email"
+                  />
 
-              <TextField
-                id="outlined-basic"
-                label="Password"
-                variant="filled"
-                placeholder="Enter your password"
-                InputProps={textFieldInputProps}
-                InputLabelProps={textFieldInputLabelProps}
-                required={true}
-                onChange={(e)=>{
-                  setUser({...user,password:e.target.value})
-                   console.log(user);
-                }}
-                type='password'
-                value={user.password}
-              />
-              </>
-            )}
+                  <TextField
+                    id="outlined-basic"
+                    label="Password"
+                    variant="filled"
+                    placeholder="Enter your password"
+                    InputProps={textFieldInputProps}
+                    InputLabelProps={textFieldInputLabelProps}
+                    required={true}
+                    onChange={(e) => {
+                      setUser({ ...user, password: e.target.value });
+                      console.log(user);
+                    }}
+                    type="password"
+                    value={user.password}
+                  />
+                </>
+              )}
               {isSignUp && (
                 <>
-                {userFlow===1 && (
-              <TextField
-                id="outlined-basic"
-                label="Confirm Password"
-                variant="filled"
-                placeholder="Enter your password"
-                InputProps={textFieldInputProps}
-                InputLabelProps={textFieldInputLabelProps}
-                required={true}
-                value={confirmPassword}
-                onChange={(e)=>{
-                  setCPassword(e.target.value)
-                  console.log(user);
-                }}
-                type='password'
-              />  
-              )}
-              
-            {userFlow===2 && (
-              <>
-              <TextField
-              id="gender"
-              label="Gender"
-              variant="filled"
-              select
-              value={user.gender}
-              required={true}
-              onChange={(e)=>{
-                setUser({...user,gender:e.target.value})
-                console.log(user);
-              }}
-              InputProps={textFieldInputProps}
-              InputLabelProps={textFieldInputLabelProps}
-              SelectProps={{
-                IconComponent: ArrowDropDownIcon,
-                style: { color: "white",borderBottom:'1px solid #fff'}, 
-              }}
-            
-            >
-              <MenuItem value="male">Male</MenuItem>
-              <MenuItem value="female">Female</MenuItem>
-              <MenuItem value="other">Other</MenuItem>
-            </TextField>
+                  {userFlow === 1 && (
+                    <TextField
+                      id="outlined-basic"
+                      label="Confirm Password"
+                      variant="filled"
+                      placeholder="Enter your password"
+                      InputProps={textFieldInputProps}
+                      InputLabelProps={textFieldInputLabelProps}
+                      required={true}
+                      value={confirmPassword}
+                      onChange={(e) => {
+                        setCPassword(e.target.value);
+                        console.log(user);
+                      }}
+                      type="password"
+                    />
+                  )}
 
-              <TextField
-                  id="bloodgroup"
-                  label="Blood Group"
-                  variant="filled"
-                  select
-                  required
-                  value={user.bloodgroup}
-                  
-                
-                  InputProps={textFieldInputProps}
-                InputLabelProps={textFieldInputLabelProps}
-                SelectProps={{
-                  IconComponent: ArrowDropDownIcon,
-                  style: { color: "white",borderBottom:'1px solid #fff'}, 
-                }}
-                onChange={(e)=>{
-                  setUser({...user,bloodgroup:e.target.value})
-                  console.log(user);
-                }}
+                  {userFlow === 2 && (
+                    <>
+                      <TextField
+                        id="gender"
+                        label="Gender"
+                        variant="filled"
+                        select
+                        value={user.gender}
+                        required={true}
+                        onChange={(e) => {
+                          setUser({ ...user, gender: e.target.value });
+                          console.log(user);
+                        }}
+                        InputProps={textFieldInputProps}
+                        InputLabelProps={textFieldInputLabelProps}
+                        SelectProps={{
+                          IconComponent: ArrowDropDownIcon,
+                          style: {
+                            color: "white",
+                            borderBottom: "1px solid #fff",
+                          },
+                        }}
+                      >
+                        <MenuItem value="male">Male</MenuItem>
+                        <MenuItem value="female">Female</MenuItem>
+                        <MenuItem value="other">Other</MenuItem>
+                      </TextField>
 
-                >
-                  <MenuItem value="A+">A+</MenuItem>
-                  <MenuItem value="A-">A-</MenuItem>
-                  <MenuItem value="B+">B+</MenuItem>
-                  <MenuItem value="B-">B-</MenuItem>
-                  <MenuItem value="O+">O+</MenuItem>
-                  <MenuItem value="O-">O-</MenuItem>
-                  <MenuItem value="AB+">AB+</MenuItem>
-                  <MenuItem value="AB-">AB-</MenuItem>
-                </TextField>
+                      <TextField
+                        id="bloodgroup"
+                        label="Blood Group"
+                        variant="filled"
+                        select
+                        required
+                        value={user.bloodgroup}
+                        InputProps={textFieldInputProps}
+                        InputLabelProps={textFieldInputLabelProps}
+                        SelectProps={{
+                          IconComponent: ArrowDropDownIcon,
+                          style: {
+                            color: "white",
+                            borderBottom: "1px solid #fff",
+                          },
+                        }}
+                        onChange={(e) => {
+                          setUser({ ...user, bloodgroup: e.target.value });
+                          console.log(user);
+                        }}
+                      >
+                        <MenuItem value="A+">A+</MenuItem>
+                        <MenuItem value="A-">A-</MenuItem>
+                        <MenuItem value="B+">B+</MenuItem>
+                        <MenuItem value="B-">B-</MenuItem>
+                        <MenuItem value="O+">O+</MenuItem>
+                        <MenuItem value="O-">O-</MenuItem>
+                        <MenuItem value="AB+">AB+</MenuItem>
+                        <MenuItem value="AB-">AB-</MenuItem>
+                      </TextField>
+                    </>
+                  )}
+                  {userFlow === 3 && (
+                    <>
+                      <TextField
+                        id="contactno"
+                        label="Contact Number"
+                        value={user.contactno}
+                        variant="filled"
+                        placeholder="Enter your contact number"
+                        InputProps={textFieldInputProps}
+                        InputLabelProps={textFieldInputLabelProps}
+                        required={true}
+                        onChange={(e) => {
+                          setUser({ ...user, contactno: e.target.value });
+                          console.log(user);
+                        }}
+                      />
+
+                      <TextField
+                        id="address"
+                        label="Address"
+                        variant="filled"
+                        value={user.address}
+                        placeholder="Enter your address"
+                        InputProps={textFieldInputProps}
+                        InputLabelProps={textFieldInputLabelProps}
+                        required={true}
+                        onChange={(e) => {
+                          setUser({ ...user, address: e.target.value });
+                          console.log(user);
+                        }}
+                      />
+
+                      <TextField
+                        id="age"
+                        label="Age"
+                        variant="filled"
+                        value={user.age}
+                        placeholder="Enter your age"
+                        InputProps={textFieldInputProps}
+                        InputLabelProps={textFieldInputLabelProps}
+                        required={true}
+                        onChange={(e) => {
+                          setUser({ ...user, age: e.target.value });
+                          console.log(user);
+                        }}
+                      />
+
+                      <TextField
+                        id="height"
+                        label="Height"
+                        value={user.height}
+                        variant="filled"
+                        placeholder="Enter your height"
+                        InputProps={textFieldInputProps}
+                        InputLabelProps={textFieldInputLabelProps}
+                        required={true}
+                        onChange={(e) => {
+                          setUser({ ...user, height: e.target.value });
+                          console.log(user);
+                        }}
+                      />
+
+                      <TextField
+                        id="weight"
+                        label="Weight"
+                        variant="filled"
+                        value={user.weight}
+                        placeholder="Enter your weight"
+                        InputProps={textFieldInputProps}
+                        InputLabelProps={textFieldInputLabelProps}
+                        required={true}
+                        onChange={(e) => {
+                          setUser({ ...user, weight: e.target.value });
+                          console.log(user);
+                        }}
+                      />
+
+                      <TextField
+                        id="allergies"
+                        label="Allergies"
+                        value={user.allergies.join(",")}
+                        variant="filled"
+                        placeholder="Enter your allergies with comma separated values"
+                        InputProps={textFieldInputProps}
+                        InputLabelProps={textFieldInputLabelProps}
+                        required={true}
+                        onChange={(e) => {
+                          setUser({
+                            ...user,
+                            allergies: e.target.value.split(","),
+                          });
+                          console.log(user);
+                        }}
+                      />
+                    </>
+                  )}
                 </>
-          )}
-          {userFlow===3 &&(
-            <>
-              <TextField
-                id="contactno"
-                label="Contact Number"
-                value={user.contactno}
-                variant="filled"
-                placeholder="Enter your contact number"
-                InputProps={textFieldInputProps}
-                InputLabelProps={textFieldInputLabelProps}
-                required={true}
-                onChange={(e)=>{
-                  setUser({...user,contactno:e.target.value})
-                  console.log(user);
-                }}
-              />
-
-              <TextField
-                id="address"
-                label="Address"
-                variant="filled"
-                value={user.address}
-                placeholder="Enter your address"
-                InputProps={textFieldInputProps}
-                InputLabelProps={textFieldInputLabelProps}
-                required={true}
-                onChange={(e)=>
-                {
-                  setUser({...user,address:e.target.value})
-                  console.log(user);
-                }}
-              />
-              
-              <TextField
-                id="age"
-                label="Age"
-                variant="filled"
-                value={user.age}
-                placeholder="Enter your age"
-                InputProps={textFieldInputProps}
-                InputLabelProps={textFieldInputLabelProps}
-                required={true}
-                onChange={(e)=>{
-                  setUser({...user,age:e.target.value})
-                  console.log(user);
-                }}
-              />
-            
-              <TextField
-                id="height"
-                label="Height"
-                value={user.height}
-                variant="filled"
-                placeholder="Enter your height"
-                InputProps={textFieldInputProps}
-                InputLabelProps={textFieldInputLabelProps}
-                required={true}
-                onChange={(e)=>{
-                  setUser({...user,height:e.target.value})
-                  console.log(user);
-                }}
-              />
-
-              <TextField
-                id="weight"
-                label="Weight"
-                variant="filled"
-                value={user.weight}
-                placeholder="Enter your weight"
-                InputProps={textFieldInputProps}
-                InputLabelProps={textFieldInputLabelProps}
-                required={true}
-                onChange={(e)=>{
-                  setUser({...user,weight:e.target.value})
-                  console.log(user);
-                }}
-              />
-
-              <TextField
-                id="allergies"
-                label="Allergies"
-                value={user.allergies.join(',')}
-                variant="filled"
-                placeholder="Enter your allergies with comma separated values"
-                InputProps={textFieldInputProps}
-                InputLabelProps={textFieldInputLabelProps}
-                required={true}
-                onChange={(e)=>{
-                  setUser({...user,allergies:e.target.value.split(',')})
-                  console.log(user);
-                }}
-              />
-              </>
-             )}
-              </>
-              )
-          }
-                
-
-
-            
+              )}
 
               <p className="text-end text-xs text-[#C7C7C7]">
                 Recover Password?
               </p>
-              <button className="w-full bg-[#4461F2] mt-10 rounded-lg h-[8%] font-bold" onClick={async ()=>{
-                if(isSignUp){
-                  if(userFlow===1){
-                    if(user.password === confirmPassword)
-                    {
-                      if(user.password==='')
-                      {
-                        alert('Password cannot be empty');
+              <button
+                className="w-full bg-[#4461F2] mt-10 rounded-lg h-[8%] font-bold"
+                onClick={async () => {
+                  if (isSignUp) {
+                    if (userFlow === 1) {
+                      if (user.password === confirmPassword) {
+                        if (user.password === "") {
+                          alert("Password cannot be empty");
+                          return;
+                        }
+                        setUserFlow(2);
+                        console.log("Set to 2");
+                      } else {
+                        alert("Password doesnt match");
                         return;
                       }
-                      setUserFlow(2);
-                      console.log('Set to 2')
+                    } else if (userFlow === 2) {
+                      console.log("Set to 3");
+                      setUserFlow(3);
+                    } else {
+                      localStorage.setItem("user", JSON.stringify(user));
+                      try {
+                        const userObj = await axios.post(
+                          "http://localhost:3000/users/patients",
+                          user,
+                          {
+                            headers: {
+                              "Access-Control-Allow-Origin":
+                                "http://localhost:5173",
+                              "Access-Control-Allow-Methods":
+                                "GET, POST, PUT, DELETE",
+                              "Access-Control-Allow-Headers": "Content-Type",
+                            },
+                            withCredentials: true,
+                          }
+                        );
+                        console.log(userObj);
+                      } catch (err) {
+                        console.log(err);
+                      }
+
+                      navigate("/home");
                     }
-                    
-                    else
-                    {
-                      alert('Password doesnt match');
-                      return;
-                    }
+                  } else {
+                    navigate("/home");
                   }
-                  else if(userFlow===2)
-                  {
-                    console.log('Set to 3');
-                    setUserFlow(3);
-                  }
-                  else
-                  {
-                    try
-                    {
-                      const userObj = await axios.post('http://localhost:3000/users/patients', user, {
-                        headers: {
-                          'Access-Control-Allow-Origin': 'http://localhost:5173',
-                          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-                          'Access-Control-Allow-Headers': 'Content-Type',
-                          
-                        },withCredentials: true,
-                      });
-                      console.log(userObj);
-                    }
-                    catch(err)
-                    {
-                      console.log(err);
-                    }
-                   
-                    navigate('/home');
-                  }
-                }
-                else{
-                  navigate('/home');  
-                }
-              }}>
+                }}
+              >
                 {isSignUp ? "Sign Up" : "Sign In"}
               </button>
             </div>
@@ -383,18 +385,26 @@ const UserHome = () => {
                 <p>your Health </p>
               </div>
               <div className="text-xl mt-16 text-start">
-                <p>{isSignUp?'I already have an account':' If you dont have an account '} </p>
+                <p>
+                  {isSignUp
+                    ? "I already have an account"
+                    : " If you dont have an account "}{" "}
+                </p>
 
                 <p>
                   you can
-                  <button onClick={() => {
-                    if(userFlow===2 ){
-                      setUserFlow(1);
-                    }
-                    
-                    setIsSignUp(!isSignUp)
-                  }}>
-                    <span className="text-[#4461F2]">&nbsp; {isSignUp ? ' Sign in':' Register here'}</span>
+                  <button
+                    onClick={() => {
+                      if (userFlow === 2) {
+                        setUserFlow(1);
+                      }
+
+                      setIsSignUp(!isSignUp);
+                    }}
+                  >
+                    <span className="text-[#4461F2]">
+                      &nbsp; {isSignUp ? " Sign in" : " Register here"}
+                    </span>
                   </button>
                 </p>
               </div>

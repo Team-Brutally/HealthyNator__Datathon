@@ -25,7 +25,10 @@ const HeaderPostLogin = ({ name }) => {
         <Link to="/">Home</Link>
         <Link to="/">About us</Link>
         <Link to="/">How to use</Link>
-        <div className="flex items-center justify-center gap-x-4 px-6">
+        <div
+          className="flex items-center justify-center gap-x-4 px-6"
+          onClick={() => navigate("/home")}
+        >
           <div className="w-fit h-fit bg-[#D9D9D9] p-2 rounded-full text-black text-sm ">
             {initials}
           </div>

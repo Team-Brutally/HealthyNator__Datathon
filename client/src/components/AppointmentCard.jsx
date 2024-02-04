@@ -2,9 +2,28 @@
 
 import React, { useEffect, useState } from "react";
 
-const AppointmentCard = ({ disabled, onClick, className }) => {
+const AppointmentCard = ({
+  disabled,
+  onClick,
+  className,
+  docName,
+  docimg,
+  experience,
+  numberOfPatientsTreated,
+  price,
+  qualification,
+  rating,
+  specialization,
+  index,
+  selected,
+  onSelect,
+
+  selectedTime,
+  selectedDate,
+}) => {
   const [cancelled, setCancelled] = useState(false);
   const [confirmCancel, setConfirmCancel] = useState(false);
+  // console.log(qualification);
   useEffect(() => {
     if (disabled) {
       setCancelled(true);
@@ -20,30 +39,22 @@ const AppointmentCard = ({ disabled, onClick, className }) => {
       } `}
     >
       <div className="h-[45%] w-full p-4 flex gap-x-6 item-center justify-center">
-        <img src={require("../assets/docimg.png")} className="h-full mt-5" />
+        <img src={docimg} className="aspect-1 rounded-full" />{" "}
         <div className="h-full py-4">
-          <p className="text-lg border-b">Dr. Vasudev</p>
-          <div className="text-xs">
-            <p>MBBS, MD</p>
-            <p>Gynecologist</p>
-            <p>Urologist</p>
-            <p>Testicular Torsion</p>
-          </div>
+          <p className="text-lg border-b">{docName}</p>{" "}
+          <div className="text-xs">{qualification}</div>
+          <p className="text-sm ">{experience} Years+ Exp</p>
         </div>
       </div>
       <div className="h-[50%] w-full  px-4 flex flex-col justify-center items-start gap-y-2">
         <div className="py-4">
           <div className="flex gap-x-4 items-center  px-4 ">
-            <img src={require("../assets/bluetick.png")} className="h-6"></img>
-            <p className="text-sm text-[#4BD472]">86% (201 patients)</p>
+            <img src={require("../assets/time.png")} className="h-6"></img>
+            <p className="text-sm text-[#4BD472]"> {selectedTime}</p>
           </div>
           <div className="flex gap-x-4 items-center  px-4 ">
-            <img src={require("../assets/cashicon.png")} className="h-6"></img>
-            <p className="text-sm ">₹2000 /Appointment</p>
-          </div>
-          <div className="flex gap-x-4 items-center  px-4 ">
-            <img src={require("../assets/cashicon.png")} className="h-6"></img>
-            <p className="text-sm ">25 Years+ Exp</p>
+            <img src={require("../assets/date.png")} className="h-6"></img>
+            <p className="text-sm ">{selectedDate}</p>
           </div>
         </div>
         {confirmCancel ? (

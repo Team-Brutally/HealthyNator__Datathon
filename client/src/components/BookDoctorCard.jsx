@@ -1,6 +1,7 @@
 // need to add props
 
 import React, { useEffect, useState } from "react";
+import { useAppContext } from "../App";
 
 const BookDoctorCard = ({
   onClick,
@@ -13,15 +14,36 @@ const BookDoctorCard = ({
   qualification,
   rating,
   specialization,
+  index,
+  selected,
+  onSelect,
+  selectedIndex,
+  selectedTime,
+  selectedDate,
 }) => {
-  console.log(qualification);
-  const [selected, setSelected] = useState(false);
+  const { docList, setDocList } = useAppContext();
+
+  const { bookedAppointment, setBookedAppointment } = useAppContext();
+  const onSelect2 = () => {
+    const selectedDoctor = docList[selectedIndex];
+    const booked = { ...selectedDoctor, selectedTime, selectedDate };
+    console.log(booked);
+    setBookedAppointment((prev) => [...prev, booked]);
+    useEffect(() => {
+      console.log(bookedAppointment)
+    
+     
+    }, [bookedAppointment])
+    
+  };
+  //   const [selected, setSelected] = useState(false);
   //   const [confirmCancel, setConfirmCancel] = useState(false);
   //   useEffect(() => {
   //     if (disabled) {
   //       setCancelled(true);
   //     }
   //   }, []);
+  //   const isSelected = index === selectedCardIndex;
 
   return (
     <div
@@ -61,12 +83,14 @@ const BookDoctorCard = ({
             selected ? "bg-[#444]" : "bg-[#4BD472]"
           }`}
           onClick={() => {
-            setSelected(!selected);
+            onSelect();
+            onSelect2();
           }}
         >
-          {selected ? "Deselect" : "Book an apppointment"}
+          {selected ? "Deselect" : "Book an appointment"}
         </button>
       </div>
+      
     </div>
   );
 };
