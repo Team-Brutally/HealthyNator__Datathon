@@ -9,6 +9,7 @@ const __dirname = dirname(__filename);
 
 const pdfgen = async (req, res) => {
   const userInput = req.body.content;
+  console.log(userInput);
   const templatePath = path.join(__dirname, "/../template.html");
 
   try {
@@ -20,7 +21,7 @@ const pdfgen = async (req, res) => {
 
     // Replace the placeholder in the template with user input
     const placeholderRegex = `${userInput}`;
-    content = content.replace(placeholderRegex, userInput);
+    content = content.replace('{content}', userInput);
 
     // Set the page content
     await page.setContent(content);

@@ -9,6 +9,7 @@ import CancelScheduleSendRoundedIcon from "@mui/icons-material/CancelScheduleSen
 import { useNavigate, Link } from "react-router-dom";
 function HealthAI() {
   const navigate = useNavigate();
+  const [chat, setChat] = useState(null);
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
   const [summary, setSummary] = useState("");
   const [input, setInput] = useState("");
@@ -164,8 +165,10 @@ function HealthAI() {
     try {
       setIsLoading(true);
       console.log(prompt);
+      let history = chat
       const response = await axios.post("http://localhost:3000/history", {
         prompt,
+        history
       });
       console.log(response.data); // Log the response data
       // Handle the response here
@@ -174,6 +177,7 @@ function HealthAI() {
         isSender: false,
       };
       console.log(modelResponse);
+      setChat(response.data.history);
       setMessages((prevMessages) => [...prevMessages, modelResponse]);
     } catch (error) {
       console.error(error); // Log the error

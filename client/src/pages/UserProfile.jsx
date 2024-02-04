@@ -3,6 +3,7 @@ import "../components/HeaderPostLogin";
 import GaugeComponent from "react-gauge-component";
 import HeaderPostLogin from "../components/HeaderPostLogin";
 import { Link, useNavigate } from "react-router-dom";
+import HomeHistoryCard from "../components/HomeHistoryCard";
 
 function UserProfile() {
   const navigate = useNavigate();
@@ -36,6 +37,39 @@ function UserProfile() {
   finalUserObject.height = finalUserObject.height + " cm";
   finalUserObject.weight = finalUserObject.weight + " kg";
 
+  let history_cards = [
+    {
+      date: "2022-10-10",
+      time: "10:00",
+      doctor: "Dr. Atharva Upare",
+      hospital: "Scamaiya Hospital",
+      status: "Confirmed",
+      index: 0,
+      doctor_img:
+        "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png",
+    },
+    {
+      date: "2022-10-10",
+      time: "10:00",
+      doctor: "Dr. Minav Karia",
+      hospital: "Somaiya Hospital",
+      status: "Confirmed",
+      index: 1,
+      doctor_img:
+        "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png",
+    },
+    {
+      date: "2023-12-10",
+      time: "12:00",
+      doctor: "Dr. Parth Bhanushali",
+      hospital: "Bhanushali Hospital",
+      status: "Cancelled",
+      index: 2,
+      doctor_img:
+        "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png",
+    },
+  ];
+
   // Now, userObject contains the object retrieved from local storage
 
   return (
@@ -47,6 +81,9 @@ function UserProfile() {
             className="flex flex-col gap-[2vh] h-[40%] bg-[#222222] px-5 py-4 rounded-[32px] "
             style={{ flex: "30%" }}
           >
+            <div>
+              <h1 className="text-[#4BD472] text-3xl font-bold text-center">BMI</h1>
+            </div>
             <GaugeComponent
               type="semicircle"
               arc={{
@@ -124,8 +161,21 @@ function UserProfile() {
                 Check Appointments
               </button>
             </div>
-            <div className="rounded-[32px] w-full h-[100%] bg-[#222222] px-16 py-16 ">
-              History here please
+            <div className="rounded-[32px] w-full h-[100%] bg-[#222222] px-16 py-16">
+              {
+                history_cards.map((card, index) => (
+                  <HomeHistoryCard
+                    key={index}
+                    date={card.date}
+                    time={card.time}
+                    doctor={card.doctor}
+                    hospital={card.hospital}
+                    status={card.status}
+                    index={card.index}
+                    doctor_img={card.doctor_img}
+                  />
+                ))
+              }
             </div>
           </div>
         </div>
