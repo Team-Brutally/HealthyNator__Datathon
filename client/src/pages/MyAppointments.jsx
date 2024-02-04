@@ -5,7 +5,7 @@ import AppointmentCard from "../components/appointmentcard";
 import { useAppContext } from "../App";
 
 const MyAppointments = () => {
-  const { bookedAppointment, setBookedAppointment } = useAppContext();
+  const { bookedAppointment } = useAppContext();
 
   const docList = bookedAppointment;
   const pastDocList = docList.slice(2, 3);

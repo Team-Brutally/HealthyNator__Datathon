@@ -26,15 +26,12 @@ const BookDoctorCard = ({
   const { bookedAppointment, setBookedAppointment } = useAppContext();
   const onSelect2 = () => {
     const selectedDoctor = docList[selectedIndex];
-    const booked = { ...selectedDoctor, selectedTime, selectedDate };
+    // const booked = { ...selectedDoctor, selectedTime, selectedDate };
     console.log(booked);
-    setBookedAppointment((prev) => [...prev, booked]);
+    // setBookedAppointment((prev) => [...prev, booked]);
     useEffect(() => {
-      console.log(bookedAppointment)
-    
-     
-    }, [bookedAppointment])
-    
+      console.log(bookedAppointment);
+    }, [bookedAppointment]);
   };
   //   const [selected, setSelected] = useState(false);
   //   const [confirmCancel, setConfirmCancel] = useState(false);
@@ -90,7 +87,6 @@ const BookDoctorCard = ({
           {selected ? "Deselect" : "Book an appointment"}
         </button>
       </div>
-      
     </div>
   );
 };

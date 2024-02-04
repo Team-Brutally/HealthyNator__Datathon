@@ -35,9 +35,18 @@ const BookDoctor = () => {
     setSelectedTime(selectedTime);
   };
 
+  const userObject = JSON.parse(localStorage.getItem("user"));
+  const finalUserObject = userObject
+    ? Object.fromEntries(
+        Object.entries(userObject).slice(0, -7) // Remove the last 7 fields
+      )
+    : userDetails;
+
+  console.log(finalUserObject);
+
   return (
     <div className="h-[100vh] w-[100vw] ">
-      <HeaderPostLogin name="Nidhi Deshpande" />
+      <HeaderPostLogin name={finalUserObject.name} />
       <div className="h-full w-full flex">
         <div className="h-[100%]  w-[70%] px-8 py-8">
           <p className="text-4xl font-bold px-2">Available Doctors:</p>

@@ -7,9 +7,10 @@ import SendIcon from "@mui/icons-material/Send";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CancelScheduleSendRoundedIcon from "@mui/icons-material/CancelScheduleSendRounded";
 import { useNavigate, Link } from "react-router-dom";
+import { useAppContext } from "../App";
+
 function HealthAI() {
   const navigate = useNavigate();
-  const [chat, setChat] = useState(null);
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
   const [summary, setSummary] = useState("");
   const [input, setInput] = useState("");
@@ -47,7 +48,7 @@ function HealthAI() {
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
-
+  const userObject = JSON.parse(localStorage.getItem("user"));
   const [messages, setMessages] = useState(() => {
     // Fetch messages from local storage on component mount
     const storedMessages = localStorage.getItem("healthAiMessages");
@@ -165,10 +166,8 @@ function HealthAI() {
     try {
       setIsLoading(true);
       console.log(prompt);
-      let history = chat
       const response = await axios.post("http://localhost:3000/history", {
         prompt,
-        history
       });
       console.log(response.data); // Log the response data
       // Handle the response here
@@ -177,7 +176,6 @@ function HealthAI() {
         isSender: false,
       };
       console.log(modelResponse);
-      setChat(response.data.history);
       setMessages((prevMessages) => [...prevMessages, modelResponse]);
     } catch (error) {
       console.error(error); // Log the error
@@ -187,13 +185,21 @@ function HealthAI() {
     }
   };
 
+  const finalUserObject = userObject
+    ? Object.fromEntries(
+        Object.entries(userObject).slice(0, -7) // Remove the last 7 fields
+      )
+    : userDetails;
+
+  console.log(finalUserObject);
+
   // useEffect(() => {
   //   fetchDataWithHistory("I am having ulcers in my mouth");
   // }
   // , []);
   return (
     <div>
-      <HeaderPostLogin name="Parth B" />
+      <HeaderPostLogin name={finalUserObject.name} />
       <div className="w-[100vw] h-[80vh] flex items-center justify-center    mt-10 ">
         <div className="h-full w-[90%] flex gap-x-6 ">
           <div
