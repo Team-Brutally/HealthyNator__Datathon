@@ -42,7 +42,7 @@ const AppointmentCard = ({
         <img src={docimg} className="aspect-1 rounded-full" />{" "}
         <div className="h-full py-4">
           <p className="text-lg border-b">{docName}</p>{" "}
-          <div className="text-xs">{qualification}</div>
+          <div className="text-xs">{qualification + ""}</div>
           <p className="text-sm ">{experience} Years+ Exp</p>
         </div>
       </div>
@@ -50,11 +50,11 @@ const AppointmentCard = ({
         <div className="py-4">
           <div className="flex gap-x-4 items-center  px-4 ">
             <img src={require("../assets/time.png")} className="h-6"></img>
-            <p className="text-sm text-[#4BD472]"> {selectedTime}</p>
+            <p className="text-xl text-[#4BD472]"> {selectedTime}</p>
           </div>
-          <div className="flex gap-x-4 items-center  px-4 ">
-            <img src={require("../assets/date.png")} className="h-6"></img>
-            <p className="text-sm ">{selectedDate}</p>
+          <div className="flex gap-x-4 items-center  px-4  text-xl ">
+            <img src={require("../assets/date.png")} className="h-6 "></img>
+            <p className="text-xl">{selectedDate}</p>
           </div>
         </div>
         {confirmCancel ? (

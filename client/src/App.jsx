@@ -55,7 +55,7 @@ export const AppProvider = ({ children }) => {
   const [bookedAppointment, setBookedAppointment] = useState([
     {
       docName: "Dr. Sneha Patel",
-      docimg: "/docimg2.jpg",
+      docimg: "/docimg3.jpg",
       qualification: ["MBBS", "MS"],
       specialization: ["Cardiologist", "Internal Medicine"],
       rating: 92,
@@ -92,7 +92,7 @@ export const AppProvider = ({ children }) => {
     },
     {
       docName: "Dr. Priya Sharma",
-      docimg: "/docimg3.jpg",
+      docimg: "/docimg4.png",
       qualification: ["MBBS", "DM"],
       specialization: ["Neurologist", "Psychiatrist"],
       rating: 86,

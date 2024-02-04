@@ -1,32 +1,42 @@
 // import "./css/Home.css";
 import "../css/Home.css";
-import { Link } from "react-router-dom"; 
-import {Link as ScrollLink} from 'react-scroll';
+import { Link } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
 
 function Home() {
   return (
     <>
       <div id="mainFlex">
-        <div className="mainTitle">
+        <div className=" absolute top-[40%] left-[60%]">
+          <div className="w-full h-full rainbow flex -z-0">
+            <div className="h-[250px] w-[450px] bg-blue-600  ">hi</div>
+          </div>
+        </div>
+        <div className="mainTitle z-10">
           <span id="gradCol">One Step Solution</span>
           <span>for immediate</span>
           <span>health concerns.</span>
           <div className="gsButton">
-          <ScrollLink to="/sign" id="signUp" style={{
-              cursor: 'pointer'
-            }}>
-            <Link to='sign'>
-              <span className="yay">Get Started</span></Link>
+            <ScrollLink
+              to="/sign"
+              id="signUp"
+              style={{
+                cursor: "pointer",
+              }}
+            >
+              <Link to="sign">
+                <span className="yay">Get Started</span>
+              </Link>
             </ScrollLink>
             <div className="backBlue"></div>
           </div>
         </div>
-        <div id="heroImg">
+        <div id="heroImg" className="z-10">
           <img src="/coupleDoc.svg"></img>
         </div>
       </div>
 
-      <div className="masterFeature" id='features'>
+      <div className="masterFeature" id="features">
         <div className="featureHead">
           <span>
             <h2>FEATURES WE PROVIDE</h2>

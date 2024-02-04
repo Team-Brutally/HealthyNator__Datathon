@@ -12,7 +12,7 @@ const Chip = ({ symptom, isActive, onClick }) => {
 
   return (
     <div
-      className={`h-fit w-fit  px-4 py-2 rounded-full border flex gap-x-2 items-center justify-center ${
+      className={`h-fit w-fit  px-4 py-2 rounded-full border flex gap-x-2 items-center justify-center cursor-pointer ${
         active ? "border-black bg-[#fff] text-black" : " border-white bg-[#222]"
       }`}
       onClick={handleActive}
