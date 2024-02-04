@@ -1,5 +1,5 @@
 import express from "express";
-import cors from "cors";
+
 import {
   getPatients,
   getDoctors,
@@ -11,7 +11,6 @@ import {
 
 const router = express.Router();
 
-router.use(cors());
 
 router.get("/patients", getPatients);
 router.get("/doctors", getDoctors);

@@ -1,5 +1,8 @@
 // import "./css/Home.css";
 import "../css/Home.css";
+import { Link } from "react-router-dom"; 
+import {Link as ScrollLink} from 'react-scroll';
+
 function Home() {
   return (
     <>
@@ -9,7 +12,12 @@ function Home() {
           <span>for immediate</span>
           <span>health concerns.</span>
           <div className="gsButton">
-            <button>Get Started</button>
+          <ScrollLink to="/sign" id="signUp" style={{
+              cursor: 'pointer'
+            }}>
+            <Link to='sign'>
+              <span className="yay">Get Started</span></Link>
+            </ScrollLink>
             <div className="backBlue"></div>
           </div>
         </div>

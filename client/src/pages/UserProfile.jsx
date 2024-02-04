@@ -32,7 +32,6 @@ function UserProfile() {
 
   let bmi =
     (userDetails.weight / userDetails.height / userDetails.height) * 10000;
-  userDetails.bmi = bmi.toFixed(2).toString() + " kg/m^2";
   userDetails.height = userDetails.height + " cm";
   userDetails.weight = userDetails.weight + " kg";
 

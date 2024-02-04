@@ -3,9 +3,13 @@ import HeaderPostLogin from "../components/HeaderPostLogin";
 import Chip from "../components/Chip";
 import ReactMarkdown from "react-markdown";
 import axios from "axios";
-
+import SendIcon from '@mui/icons-material/Send';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CancelScheduleSendRoundedIcon from '@mui/icons-material/CancelScheduleSendRounded';
 function HealthAI() {
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
+  const [summary, setSummary] = useState("");
+  const [input, setInput] = useState("");
 
   const handleChipClick = (symptom) => {
     // Handle the click event, you can update the state or perform other actions
@@ -54,11 +58,13 @@ function HealthAI() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(inputValue === '') return;
     console.log(inputValue);
     const msg = {
       message: inputValue,
       isSender: true,
     };
+
     setMessages((prevMessages) => [...prevMessages, msg]);
 
     setInputValue("");
@@ -245,22 +251,60 @@ function HealthAI() {
                 value={inputValue}
               />
               <div className="w-[10%] h-full rounded-xl py-6 px-4 flex justify-center items-center">
-                <button className="w-[90%] h-full py-6 bg-[#FF0404] px-4 rounded-2xl flex justify-center items-center">
-                  <img
-                    src={require("../assets/exit.svg")}
-                    className="aspect-1 "
-                    alt=""
-                  />
+              <button className="w-[50%] h-full py-6 ml-5 mr-2 bg-[#eb2929] px-4 rounded-2xl flex items-center justify-center" onClick={()=>{
+                  setMessages([]);
+                  localStorage.removeItem("healthAiMessages");
+              }}>
+                  <DeleteIcon />
+                </button>
+                <button type='button' className="w-[90%] h-full py-6 bg-[#FF0404] px-4 rounded-2xl flex justify-center items-center" onClick={async ()=>{
+                     const storedMessages = localStorage.getItem("healthAiMessages");
+                  const parsedMessages = JSON.parse(storedMessages);
+         
+                  for(let i = 0; i < parsedMessages.length; i++){
+                    if(parsedMessages[i].isSender===false){
+                    setInput((prev) => prev + parsedMessages[i].message + " ")
+                    }
+                  }
+
+                  console.log(input);
+
+                  try
+                  {
+                    const response= await axios.post("http://localhost:3000/history", {
+                    prompt: "Give the answer in only 5 lines in md format.",
+                    data:input
+                  });
+                  console.log(response.data);
+
+                  const response2 =await axios.post("http://localhost:3000/features/pdfgenerate", {
+                    content: response.data
+                  });
+
+                  
+                  const pdfData = response2.data;
+              
+                  const blob = new Blob([pdfData], { type: "application/pdf" });
+                  
+                  const link = document.createElement("a");
+                  link.href = window.URL.createObjectURL(blob);
+                  link.download = "output.pdf";
+                  link.click();
+                  
+                  }
+                  catch(e)
+                  {
+                    console.log(e);
+                  }
+                }}>
+                  <CancelScheduleSendRoundedIcon />
                 </button>
               </div>
               <div className="w-[10%] h-full rounded-xl py-6 mr-2 flex justify-center items-center">
                 <button className="w-[90%] h-full py-6 bg-[#345B2E] px-4 rounded-2xl flex items-center justify-center">
-                  <img
-                    src={require("../assets/send-2.svg")}
-                    className="  aspect-1"
-                    alt=""
-                  />
+                  <SendIcon />
                 </button>
+              
               </div>
             </form>
           </div>
