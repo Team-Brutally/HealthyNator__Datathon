@@ -24,7 +24,6 @@ const HeaderPostLogin = ({ name }) => {
       <div className="flex items-center justify-center gap-x-24 text-xl font-semibold mt-8">
         <Link to="/">Home</Link>
         <Link to="/">About us</Link>
-        <Link to="/">How to use</Link>
         <div
           className="flex items-center justify-center gap-x-4 px-6"
           onClick={() => navigate("/home")}
