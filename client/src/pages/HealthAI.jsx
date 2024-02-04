@@ -324,7 +324,7 @@ function HealthAI() {
                       const response = await axios.post(
                         "http://localhost:3000/history",
                         {
-                          prompt: "Give the summary in 5 lines of the data given below without specifying any names"+input,
+                          prompt: "Give the summary in 5 lines of the data given below without specifying any names, give only the summary "+input,
                           data: input,
                         }
                       );
