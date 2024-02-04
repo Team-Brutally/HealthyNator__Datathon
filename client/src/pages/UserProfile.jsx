@@ -21,25 +21,26 @@ function UserProfile() {
   };
 
   // Retrieve user object from local storage
-  // const userObject = JSON.parse(localStorage.getItem("user"));
-  // const finalUserObject = userObject
-  //   ? Object.fromEntries(
-  //       Object.entries(userObject).slice(0, -7) // Remove the last 7 fields
-  //     )
-  //   : userDetails;
+  const userObject = JSON.parse(localStorage.getItem("user"));
+  const finalUserObject = userObject
+    ? Object.fromEntries(
+        Object.entries(userObject).slice(0, -7) // Remove the last 7 fields
+      )
+    : userDetails;
 
-  // console.log(finalUserObject);
+  console.log(finalUserObject);
 
   let bmi =
-    (userDetails.weight / userDetails.height / userDetails.height) * 10000;
-  userDetails.height = userDetails.height + " cm";
-  userDetails.weight = userDetails.weight + " kg";
+    (finalUserObject.weight / finalUserObject.height / finalUserObject.height) *
+    10000;
+  finalUserObject.height = finalUserObject.height + " cm";
+  finalUserObject.weight = finalUserObject.weight + " kg";
 
   // Now, userObject contains the object retrieved from local storage
 
   return (
     <div>
-      <HeaderPostLogin name="Parth Bhanushali" />
+      <HeaderPostLogin name={finalUserObject.name} />
       <div className="w-[100vw] min-h-[80vh] max-h-full flex items-center justify-center mt-10">
         <div className="flex flex-row gap-x-4 h-full mx-24 text-[21px]">
           <div
@@ -86,7 +87,7 @@ function UserProfile() {
             />
 
             <div className="flex gap-y-4 flex-col w-[90%]">
-              {Object.entries(userDetails).map(([key, value]) => (
+              {Object.entries(finalUserObject).map(([key, value]) => (
                 <p
                   key={key}
                   className={

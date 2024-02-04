@@ -6,12 +6,13 @@ import axios from "axios";
 import SendIcon from "@mui/icons-material/Send";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CancelScheduleSendRoundedIcon from "@mui/icons-material/CancelScheduleSendRounded";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 function HealthAI() {
   const navigate = useNavigate();
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
   const [summary, setSummary] = useState("");
   const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChipClick = (symptom) => {
     // Handle the click event, you can update the state or perform other actions
@@ -161,6 +162,7 @@ function HealthAI() {
 
   const fetchDataWithHistory = async (prompt) => {
     try {
+      setIsLoading(true);
       console.log(prompt);
       const response = await axios.post("http://localhost:3000/history", {
         prompt,
@@ -176,6 +178,8 @@ function HealthAI() {
     } catch (error) {
       console.error(error); // Log the error
       // Handle the error here
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -224,6 +228,20 @@ function HealthAI() {
                           className="bg-[#2F8953] text-xl rounded-3xl h-fit max-w-[45%] flex flex-col items-start justify-start px-8 py-2.5 break-words self-start bg-operator-message-bg text-black"
                           style={{ borderTopLeftRadius: 0 }}
                         >
+                          {msg.addLink === true && (
+                            <>
+                              <h3 className="font-bold">
+                                This was the Summary for your symptoms, Pls Take
+                                Care
+                              </h3>
+                              <Link
+                                to="/bookdoc"
+                                className="text-[#000088]  underline"
+                              >
+                                Connect to Recommended Doctors
+                              </Link>
+                            </>
+                          )}
                           <ReactMarkdown>{msg.message}</ReactMarkdown>
                         </div>
                       </div>
@@ -239,6 +257,16 @@ function HealthAI() {
                     );
                   }
                 })}
+                {isLoading && (
+                  <div className="flex h-fit w-full items-center gap-x-2">
+                    <div
+                      className="bg-[#2F8953] text-xl rounded-3xl h-fit max-w-[45%] flex flex-col items-start justify-start px-8 py-2.5 break-words self-start bg-operator-message-bg text-black"
+                      style={{ borderTopLeftRadius: 0 }}
+                    >
+                      Loading....
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -267,7 +295,6 @@ function HealthAI() {
                   type="button"
                   className="w-[90%] h-full py-6 bg-[#FF0404] px-4 rounded-2xl flex justify-center items-center"
                   onClick={async () => {
-                    navigate("/bookdoc");
                     const storedMessages =
                       localStorage.getItem("healthAiMessages");
                     const parsedMessages = JSON.parse(storedMessages);
@@ -283,35 +310,28 @@ function HealthAI() {
                     console.log(input);
 
                     try {
+                      setIsLoading(true);
                       const response = await axios.post(
                         "http://localhost:3000/history",
                         {
-                          prompt:
-                            "Give the answer in only 5 lines in md format.",
+                          prompt: "Give the summary in 5 lines",
                           data: input,
                         }
                       );
                       console.log(response.data);
 
-                      const response2 = await axios.post(
-                        "http://localhost:3000/features/pdfgenerate",
+                      setMessages([
+                        ...messages,
                         {
-                          content: response.data,
-                        }
-                      );
-
-                      const pdfData = response2.data;
-
-                      const blob = new Blob([pdfData], {
-                        type: "application/pdf",
-                      });
-
-                      const link = document.createElement("a");
-                      link.href = window.URL.createObjectURL(blob);
-                      link.download = "output.pdf";
-                      link.click();
+                          message: response.data.response,
+                          isSender: false,
+                          addLink: true,
+                        },
+                      ]);
                     } catch (e) {
                       console.log(e);
+                    } finally {
+                      setIsLoading(false);
                     }
                   }}
                 >
